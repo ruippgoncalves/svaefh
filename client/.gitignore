@@ -1,0 +1,18 @@
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.log
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+confi.env
+
+docker/ssl.*
+docker/nginx.conf
+
+# macOS
+.DS_Store

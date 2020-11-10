@@ -1,0 +1,43 @@
+{
+    "expo": {
+        "scheme": "svaefh",
+        "name": "Sistema de Votação AEFH",
+        "slug": "svaefh",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "githubUrl": "https://github.com/ruippgoncalves",
+        "privacy": "hidden",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#05738C"
+        },
+        "platforms": [
+            "ios",
+            "android",
+            "web"
+        ],
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "pt.aefh.svaefh"
+        },
+        "android": {
+            "package": "pt.aefh.svaefh"
+        },
+        "web": {
+            "favicon": "./assets/favicon.png",
+            "lang": "pt",
+            "description": "Sistema de Votação AEFH"
+        },
+        "extra": {
+            "API": "http://localhost:3000"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  client:
+    build: client
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - "server"
+  server:
+    build: server
+    links:
+      - "mongodb"
+  mongodb:
+    image: mongo:4.4.1
+
+networks:
+  default:
+    name: svaefh
+    driver: bridge
