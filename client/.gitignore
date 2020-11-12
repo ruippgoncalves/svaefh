@@ -10,6 +10,7 @@ npm-debug.*
 *.orig.*
 web-build/
 confi.env
+app.json
 
 docker/ssl.*
 docker/nginx.conf

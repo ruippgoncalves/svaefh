@@ -128,7 +128,8 @@ export default function Dados({ route, navigation }) {
             url: `${Constants.manifest.extra.API}/votacao/terminar`,
             headers: { Authorization: 'Bearer ' + await AsyncStorage.getItem('@user') },
             data: {
-                votacao: _id
+                votacao: _id,
+                winner: winner()
             }
         });
 

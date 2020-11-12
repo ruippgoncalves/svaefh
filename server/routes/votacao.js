@@ -7,6 +7,7 @@ const qrcode = require('qrcode');
 const Votacao = require('../models/Votacao');
 const Option = require('../models/Option');
 const Voto = require('../models/Voto');
+const email = require('../config/email');
 
 // Get Votacoes
 router.get('/obter', requireAuthCriar, (req, res) => {
@@ -144,13 +145,17 @@ router.post('/iniciar', requireAuthCriar, [
             if (err) console.log(err);
 
             res.json({ code: data.code });
+
+            if (data.allow.length !== 0)
+                email(data.allow, data.code, 'Caros(as) alunos(as) e/ou professores(as),<br>Está a ser convidado para uma votação, use o código acima para poder votar.');
         });
     });
 });
 
 // Terminate Votacao
 router.delete('/terminar', requireAuthCriar, [
-    body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId()
+    body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId(),
+    body('winner').isString().toString()
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -164,6 +169,8 @@ router.delete('/terminar', requireAuthCriar, [
         }
 
         res.sendStatus(data ? 200 : 400);
+
+        email(data.createdBy, 'Votação terminada!', 'A opção vencedora é: ' + req.body.winner);
     });
 });
 

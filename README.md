@@ -48,13 +48,14 @@ São Necessários:
 
 - Docker e Docker Compose
 - Chaves da Google OAuth2 API
+- Email No-Reply (SMTP e Less Secure Apps ativas para essa conta de email)
 - Dominios dos Emails de Professores e Alunos Distintos (ou sub-dominios Ex: email@alunos.aefh.pt; email@aefh.pt)
 
 Intruções:
 
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
-    <li>Editar em client/app.json a chave expo.extra.API para https://website/api/v1 (linha 43)</li>
+    <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 43)</li>
     <li>Editar as Linhas 3 e 11 em client/docker/nginx.example.conf e Renomea-lo para nginx.conf</li>
     <li>Colocar os Ficheiros ssl.crt/ssl.key em client/docker</li>
     <li>Executar o Comando: docker-compose up</li>
@@ -94,3 +95,5 @@ BackEnd:
 Adicionalmente:
 - MongoDB
 - Docker
+- Nginx
+- Mosaico
