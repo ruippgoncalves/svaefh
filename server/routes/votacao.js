@@ -87,23 +87,6 @@ router.patch('/alterar', requireAuthCriar, [
     if (update._v != undefined) delete update._v;
     if (update._id != undefined) delete update._id;
 
-    // Update Options
-    if (update.options.length != 0) {
-        await Option.deleteMany({ votacao: req.body.votacao }, err => err ? console.log(err) : null);
-
-        await update.options.map(async (option, i) => {
-            let opt = new Option({ title: option, votacao: req.body.votacao });
-            await opt.save(err => err ? console.log(err) : null);
-
-            update.options[i] = opt._id;
-        });
-    }
-
-    // Update allow
-    if (update.allow.length != 0) {
-        update.allow.map((key, i) => update.allow[i] = key.toUpperCase());
-    }
-
     // Update Votacao
     await Votacao.findOne({ createdBy: req.user._id, _id: req.body.votacao }, async (err, data) => {
         if (err) {
@@ -111,6 +94,23 @@ router.patch('/alterar', requireAuthCriar, [
         }
 
         if (data.code || data.over) return res.sendStatus(400);
+
+        // Update Options
+        if (update.options.length != 0) {
+            await Option.deleteMany({ votacao: req.body.votacao }, err => err ? console.log(err) : null);
+
+            await update.options.map(async (option, i) => {
+                let opt = new Option({ title: option, votacao: req.body.votacao });
+                await opt.save(err => err ? console.log(err) : null);
+
+                update.options[i] = opt._id;
+            });
+        }
+
+        // Update allow
+        if (update.allow.length != 0) {
+            update.allow.map((key, i) => update.allow[i] = key.toUpperCase());
+        }
 
         await Votacao.findOneAndUpdate({ createdBy: req.user._id, _id: req.body.votacao }, update, (err, data) => {
             if (err) {
@@ -131,7 +131,7 @@ router.post('/iniciar', requireAuthCriar, [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    Votacao.findOne({ createdBy: req.user._id, _id: req.body.votacao }, { code: 1, over: 1, _id: 0 }, (err, data) => {
+    Votacao.findOne({ createdBy: req.user._id, _id: req.body.votacao }, { code: 1, over: 1, _id: 0, options: 1 }, (err, data) => {
         if (err) {
             return res.sendStatus(400);
         }

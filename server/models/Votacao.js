@@ -5,7 +5,14 @@ const VotacaoSchema = new mongoose.Schema({
     internal: { type: Boolean, required: true, default: true },
     createdBy: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
     ir: { type: Boolean, required: true, default: false },
-    code: { type: String, required: false, unique: true, sparse: true },
+    code: {
+        type: String, index: {
+            unique: true,
+            partialFilterExpression: {
+                code: { $type: 'string' }
+            }
+        }
+    },
     over: { type: Boolean, default: false },
     createdAt: { type: Date, required: true, default: new Date() },
     startedAt: { type: Date, required: false },
