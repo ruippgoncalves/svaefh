@@ -55,7 +55,7 @@ Intruções:
 
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
-    <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 43)</li>
+    <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
     <li>Editar as Linhas 3 e 11 em client/docker/nginx.example.conf e Renomea-lo para nginx.conf</li>
     <li>Colocar os Ficheiros ssl.crt/ssl.key em client/docker</li>
     <li>Executar o Comando: docker-compose up</li>
