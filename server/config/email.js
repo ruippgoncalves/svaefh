@@ -334,14 +334,14 @@ function sendMail(sendTo, title, info) {
                                     <a target="_new"
                                         href="https://pt-pt.facebook.com/AgrupamentoDeEscolasFranciscoDeHolanda"><img
                                             src="${process.env.BACKEND + '/email/facebook.png'}"
-                                            alt="Seguici su facebook" style="padding: 0 5px 0px 0px;" width="48"
+                                            alt="Seguir no facebook" style="padding: 0 5px 0px 0px;" width="48"
                                             height="48"></a>
 
 
 
                                     <a target="_new" href="https://www.instagram.com/aefranciscoholanda/"><img
                                             src="${process.env.BACKEND + '/email/instagram.png'}"
-                                            alt="Seguici su instagram" style="padding: 0 0px 0px 5px;" width="48"
+                                            alt="Seguir no instagram" style="padding: 0 0px 0px 5px;" width="48"
                                             height="48"></a></td>
                             </tr>
                         </tbody>

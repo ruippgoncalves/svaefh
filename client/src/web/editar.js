@@ -162,7 +162,7 @@ export default function Gestao({ route, navigation }) {
                 )}
             </View>
             <View style={styles.startOrResults}>
-                <Button title={votacao.running ? "Ver Resultados" : "Iniciar"} onPress={() => navigation.navigate('Dados da Votação', { _id: _id, name: votacao.name, start: !votacao.running, over: votacao.running && ! votacao.code, ir: votacao.ir })} />
+                <Button title={votacao.running ? "Ver Resultados" : "Iniciar"} onPress={() => {if (votacao.options.length !== 0) navigation.navigate('Dados da Votação', { _id: _id, name: votacao.name, start: !votacao.running, over: votacao.running && ! votacao.code, ir: votacao.ir })}} />
             </View>
         </View>
     )

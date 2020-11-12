@@ -138,7 +138,7 @@ router.post('/iniciar', requireAuthCriar, [
 
         if (!data) return res.json({});
 
-        if (data.over || data.code) return res.sendStatus(400);
+        if (data.over || data.code || data.options.length === 0) return res.sendStatus(400);
 
         // Update
         Votacao.findOneAndUpdate({ createdBy: req.user._id, _id: req.body.votacao }, { code: randomBytes(2).toString('hex').toUpperCase(), startedAt: new Date() }, { new: true }, (err, data) => {
@@ -155,7 +155,7 @@ router.post('/iniciar', requireAuthCriar, [
 // Terminate Votacao
 router.delete('/terminar', requireAuthCriar, [
     body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId(),
-    body('winner').isString().toString()
+    body('winner').isString()
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -170,7 +170,7 @@ router.delete('/terminar', requireAuthCriar, [
 
         res.sendStatus(data ? 200 : 400);
 
-        email(data.createdBy, 'Votação terminada!', 'A opção vencedora é: ' + req.body.winner);
+        email(req.user.email + '@' + process.env.TEACHERS_EMAIL, 'Votação terminada!', 'A opção vencedora é: ' + req.body.winner);
     });
 });
 
