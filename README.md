@@ -5,12 +5,12 @@
 
 # Sistema de Votação AEFH
 
-[**O que é o Sistema de Votação AEFH**](#O-que-é-o-Sistema-de-Votação-AEFH)
-| [**Origem**](#Origem)
-| [**Objetivos**](#Objetivos)
-| [**Funcionalidades**](#Funcionalidades)
-| [**Como Utilizar**](#Como-Utilizar)
-| [**Tecnologias Utilizadas**](#Tecnologias-Utilizadas)
+[**O que é o Sistema de Votação AEFH**](#o-que-é-o-sistema-de-votação-aefh)
+| [**Origem**](#origem)
+| [**Objetivos**](#objetivos)
+| [**Funcionalidades**](#funcionalidades)
+| [**Como Utilizar**](#como-utilizar)
+| [**Tecnologias Utilizadas**](#tecnologias-utilizadas)
 
 ## O que é o Sistema de Votação AEFH
 
