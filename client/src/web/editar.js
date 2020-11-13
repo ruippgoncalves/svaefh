@@ -54,6 +54,8 @@ export default function Gestao({ route, navigation }) {
         }
 
         const timeout = setTimeout(async () => {
+            if (votacao.over || votacao.running) return;
+
             // Prevent Sending Invalid Emails
             let send = false;
             votacao.allow.map(email => { send = send || email.indexOf('@') === -1 });
@@ -143,7 +145,7 @@ export default function Gestao({ route, navigation }) {
                 <ScrollView style={{ backgroundColor: 'white', padding: 10, marginBottom: 10, marginTop: 10 }}>
                     <Text style={{ fontWeight: 'bold' }}>Opções:</Text>
                     {votacao.options.map((option, i) => (
-                        <TextInput key={i} value={option} onChangeText={text => acOpt(i, text)} autoFocus={i === votacao.options.length - 1 && focus === 'option'} editable={!votacao.running} />
+                        <TextInput key={i} value={option} onChangeText={text => acOpt(i, text)} autoFocus={i === votacao.options.length - 1 && focus === 'option'} editable={!votacao.running} maxLength={50} />
                     ))}
                     {!votacao.running && (
                         <TextInput key={votacao.options.length} placeholder={"Nova Opção"} onChangeText={text => { acOpt(votacao.options.length, text); setFocus('option'); }} />

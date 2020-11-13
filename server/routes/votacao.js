@@ -68,7 +68,7 @@ router.patch('/alterar', requireAuthCriar, [
     body('update.internal', 'internal: Boolean').optional({ nullable: true }).isBoolean().toBoolean(),
     body('update.ir', 'ir: Boolean').optional({ nullable: true }).isBoolean().toBoolean(),
     body('update.options', 'options: Array').isArray().toArray(),
-    body('update.options.*', 'options.*: String').optional({ nullable: true }).isString(),
+    body('update.options.*', 'options.*: String').optional({ nullable: true }).isString().isLength({ min: 1, max: 50 }),
     body('update.allow', 'allow: Array').isArray().toArray(),
     body('update.allow.*', 'allow.*: String').optional({ nullable: true }).isEmail()
 ], async (req, res) => {
@@ -154,8 +154,7 @@ router.post('/iniciar', requireAuthCriar, [
 
 // Terminate Votacao
 router.delete('/terminar', requireAuthCriar, [
-    body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId(),
-    body('winner').isString()
+    body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId()
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -169,8 +168,6 @@ router.delete('/terminar', requireAuthCriar, [
         }
 
         res.sendStatus(data ? 200 : 400);
-
-        email(req.user.email + '@' + process.env.TEACHERS_EMAIL, 'Votação terminada!', 'A opção vencedora é: ' + req.body.winner);
     });
 });
 
@@ -235,10 +232,10 @@ router.get('/rtdata', requireAuthCriar, [
 
         if (!votacao.ir) return res.json(await Voto.find(optimize, { option: 1, irpos: 1 }));
 
-        const votos = await Voto.find(optimize, { option: 1, irpos: 1, user: 1 });
+        const votos = await Voto.find(optimize, { option: 1, irpos: 1, user: 1, publicUnique: 1 });
         if (!votos) return res.json({ votos: [], previous: null });
 
-        let users = Array.from(new Set(votos.map(voto => voto.user.toString())));
+        let users = Array.from(new Set(votos.map(voto => voto.user ? voto.user.toString() : voto.publicUnique.toString())));
         let votosFinais = new Array(users.length);
 
         for (let i = 0; i < users.length; i++) {
@@ -246,7 +243,7 @@ router.get('/rtdata', requireAuthCriar, [
         }
 
         votos.forEach(voto => {
-            const pos = users.indexOf(voto.user.toString());
+            const pos = users.indexOf(voto.user ? voto.user.toString() : voto.publicUnique.toString());
 
             votosFinais[pos][voto.irpos - 1] = voto.option;
         });
@@ -332,13 +329,15 @@ router.post('/votar', authAvaiable, [
 
         // Save in DB
         try {
+            const publicUnique = !data.internal ? mongoose.Types.ObjectId() : null;
+
             for (let opt of req.body.voto) {
                 let voto = new Voto({
                     votacao: req.body.votacao,
                     option: opt.opt,
                     user: req.user ? req.user._id : null,
                     irpos: data.ir ? opt.ir : null,
-                    publicUnique: !data.internal ? mongoose.Types.ObjectId() : null
+                    publicUnique: publicUnique
                 });
 
                 await voto.save();

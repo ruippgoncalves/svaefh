@@ -65,11 +65,13 @@ export default function Dados({ route, navigation }) {
             }
         })
             .then(dat => {
-                if (dat.data.length != 0) {
-                    if (ir) {
+                if (ir) {
+                    if (dat.data.votos.length != 0) {
                         setOptimizer(dat.data.previous);
                         setData([...data, ...dat.data.votos]);
-                    } else {
+                    }
+                } else {
+                    if (dat.data.length != 0) {
                         setOptimizer(dat.data[dat.data.length - 1]._id);
                         setData([...data, ...dat.data]);
                     }
@@ -128,8 +130,7 @@ export default function Dados({ route, navigation }) {
             url: `${Constants.manifest.extra.API}/votacao/terminar`,
             headers: { Authorization: 'Bearer ' + await AsyncStorage.getItem('@user') },
             data: {
-                votacao: _id,
-                winner: winner()
+                votacao: _id
             }
         });
 
@@ -187,10 +188,13 @@ export default function Dados({ route, navigation }) {
     // Get Winner
     function winner() {
         if (finalData[0] == undefined) return;
+        if (data.length == 0) return;
 
         let arr = finalData.map(data => data.count);
+        const max = Math.max.apply(null, arr);
 
-        return finalData[arr.indexOf(Math.max.apply(null, arr))].title;
+        if (arr.filter(v => v === max).length !== 1) return `Expate (${max} ponto(s))`;
+        return finalData[arr.indexOf(max)].title;
     }
 
     return (
@@ -220,6 +224,7 @@ export default function Dados({ route, navigation }) {
                             );
                         })}
                     </ScrollView>
+                    <Text style={{ fontSize: 18 }}>Total de Votos: {data.length}</Text>
                     {!over && (
                         <Button title="Terminar" onPress={stop} />
                     )}
