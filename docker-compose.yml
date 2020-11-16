@@ -8,12 +8,35 @@ services:
       - "443:443"
     links:
       - "server"
+    volumes:
+      - "./data/nginx:/var/log/nginx/"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+
   server:
     build: server
     links:
       - "mongodb"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+
   mongodb:
     image: mongo:4.4.1
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+    deploy:
+      placement:
+        max_replicas_per_node: 1
 
 networks:
   default:
