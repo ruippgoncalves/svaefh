@@ -11,9 +11,6 @@ services:
     volumes:
       - "./data/nginx:/var/log/nginx/"
     deploy:
-      replicas: 2
-      update_config:
-        parallelism: 2
       restart_policy:
         condition: on-failure
 
@@ -23,8 +20,6 @@ services:
       - "mongodb"
     deploy:
       replicas: 2
-      update_config:
-        parallelism: 2
       restart_policy:
         condition: on-failure
 

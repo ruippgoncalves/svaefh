@@ -68,9 +68,8 @@ Para Fins de Teste (Self-Signed Certificate):
 CertBot (Let's Encrypt)
 
     certbot certonly --manual -d mydomain.com
-    mv privkey.pem client/docker/ssl.key
-    mv mv fullchain.pem client/docker/ssl.crt
-    rm *.pem
+    mv /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl.key
+    mv /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl.crt
 
 Em Adição, para Android e IOS, São Necessários:
 
