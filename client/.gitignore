@@ -14,7 +14,7 @@ app.json
 
 docker/ssl.*
 docker/nginx.conf
-docker/letsencrypt
+docker/letsencrypt/*
 !docker/letsencrypt/.gitkeep
 
 # macOS

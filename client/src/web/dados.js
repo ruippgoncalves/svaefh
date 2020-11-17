@@ -194,9 +194,9 @@ export default function Dados({ route, navigation }) {
 
         // Votos Nulos/Brancos
         if (!ir) {
-            const votoNulo = finalData.findIndex('Voto Nulo');
+            const votoNulo = finalData.indexOf('Voto Nulo');
             if (votoNulo !== -1) arr.splice(votoNulo, 1);
-            const votoBranco = finalData.findIndex('Voto em Branco');
+            const votoBranco = finalData.indexOf('Voto em Branco');
             if (votoBranco !== -1) arr.splice(votoBranco, 1);
         }
 

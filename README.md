@@ -56,7 +56,7 @@ Intruções:
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
     <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
-    <li>Renomear client/docker/nginx.example.conf para nginx.conf</li>
+    <li>Copiar client/docker/nginx.example.conf para nginx.conf</li>
     <li>Colocar os Ficheiros ssl.crt/ssl.key em client/docker</li>
     <li>Executar o Comando: sudo docker-compose up -d</li>
 </ol>
@@ -73,8 +73,8 @@ CertBot (Let's Encrypt)
     # Colocar o token (acme-challenge) em client/docker/letsencrypt e executar sudo docker-compose up
     # Apos a criação do certificado, precione ctrl + c para fechar o docker
     # No passo 5 utilizar adicionalmente a flag --build, Ex: sudo docker-compose up -d --build
-    mv /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl.key
-    mv /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl.crt
+    cp /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl.key
+    cp /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl.crt
 
 Em Adição, para Android e IOS, São Necessários:
 
