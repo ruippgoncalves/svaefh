@@ -46,7 +46,7 @@ As principais funcionalidades:
 
 São Necessários:
 
-- Docker e Docker Compose
+- Docker e Docker Compose [(Opcionalmente Docker Registry e Docker Swarm Mode)](https://docs.docker.com/engine/swarm/stack-deploy/)
 - Chaves da Google OAuth2 API
 - Email No-Reply (SMTP e Less Secure Apps ativas para essa conta de email)
 - Dominios dos Emails de Professores e Alunos Distintos (ou sub-dominios Ex: email@alunos.aefh.pt; email@aefh.pt)
@@ -56,9 +56,9 @@ Intruções:
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
     <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
-    <li>Editar as Linhas 3 e 11 em client/docker/nginx.example.conf e Renomea-lo para nginx.conf</li>
+    <li>Renomear client/docker/nginx.example.conf para nginx.conf</li>
     <li>Colocar os Ficheiros ssl.crt/ssl.key em client/docker</li>
-    <li>Executar o Comando: docker-compose up</li>
+    <li>Executar o Comando: sudo docker-compose up -d</li>
 </ol>
 
 Para Fins de Teste (Self-Signed Certificate):
@@ -68,6 +68,11 @@ Para Fins de Teste (Self-Signed Certificate):
 CertBot (Let's Encrypt)
 
     certbot certonly --manual -d mydomain.com
+    # Criar certificado sem a utilização de servidores adicionais:
+    # https://letsencrypt.org/docs/challenge-types/#http-01-challenge
+    # Colocar o token (acme-challenge) em client/docker/letsencrypt e executar sudo docker-compose up
+    # Apos a criação do certificado, precione ctrl + c para fechar o docker
+    # No passo 5 utilizar adicionalmente a flag --build, Ex: sudo docker-compose up -d --build
     mv /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl.key
     mv /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl.crt
 

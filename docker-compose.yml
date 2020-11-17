@@ -11,6 +11,8 @@ services:
     volumes:
       - "./data/nginx:/var/log/nginx/"
     deploy:
+      placement:
+        max_replicas_per_node: 1
       restart_policy:
         condition: on-failure
 
@@ -19,7 +21,9 @@ services:
     links:
       - "mongodb"
     deploy:
-      replicas: 2
+      replicas: 1
+      placement:
+        max_replicas_per_node: 1
       restart_policy:
         condition: on-failure
 

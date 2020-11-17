@@ -73,7 +73,7 @@ export default function Gestao({ route, navigation }) {
                     update: votacao
                 }
             });
-        }, 1000);
+        }, 500);
 
         return () => clearTimeout(timeout);
     }, [votacao]);
@@ -109,6 +109,16 @@ export default function Gestao({ route, navigation }) {
 
         setVotacao(state);
         setFocus('none');
+    }
+
+    // Add Branco/Nulo
+    function addBN() {
+        let state = {...votacao};
+
+        state.options[state.options.length] = 'Voto Nulo';
+        state.options[state.options.length] = 'Voto em Branco';
+
+        setVotacao(state);
     }
 
     return (
@@ -149,6 +159,11 @@ export default function Gestao({ route, navigation }) {
                     ))}
                     {!votacao.running && (
                         <TextInput key={votacao.options.length} placeholder={"Nova Opção"} onChangeText={text => { acOpt(votacao.options.length, text); setFocus('option'); }} />
+                    )}
+                    {!votacao.running && !votacao.ir && (votacao.options.findIndex('Voto Nulo') === -1 || votacao.options.findIndex('Voto em Branco') === -1) (
+                        <View style={{width: '100%'}}>
+                            <Button title="Adicionar Votos Brancos/Nulos" onPress={addBN} />
+                        </View>
                     )}
                 </ScrollView>
                 {(votacao.internal && !(votacao.running && votacao.allow.length == 0)) && (

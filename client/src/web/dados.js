@@ -191,6 +191,15 @@ export default function Dados({ route, navigation }) {
         if (data.length == 0) return;
 
         let arr = finalData.map(data => data.count);
+
+        // Votos Nulos/Brancos
+        if (!ir) {
+            const votoNulo = finalData.findIndex('Voto Nulo');
+            if (votoNulo !== -1) arr.splice(votoNulo, 1);
+            const votoBranco = finalData.findIndex('Voto em Branco');
+            if (votoBranco !== -1) arr.splice(votoBranco, 1);
+        }
+
         const max = Math.max.apply(null, arr);
 
         if (arr.filter(v => v === max).length !== 1) return `Expate (${max} ponto(s))`;
