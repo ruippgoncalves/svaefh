@@ -28,7 +28,7 @@ COPY docker/ssl.* /etc/nginx/
 
 # Let's Encrypt
 WORKDIR /usr/src/svaefh-letsencrypt
-COPY ./docker/letsencrypt/* .
+COPY ./docker/letsencrypt/* ./
 
 # Create svaefh directory
 WORKDIR /usr/src/svaefh

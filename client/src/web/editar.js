@@ -160,7 +160,7 @@ export default function Gestao({ route, navigation }) {
                     {!votacao.running && (
                         <TextInput key={votacao.options.length} placeholder={"Nova Opção"} onChangeText={text => { acOpt(votacao.options.length, text); setFocus('option'); }} />
                     )}
-                    {!votacao.running && !votacao.ir && (votacao.options.indexOf('Voto Nulo') === -1 || votacao.options.indexOf('Voto em Branco') === -1) (
+                    {!votacao.running && !votacao.ir && (votacao.options.indexOf('Voto Nulo') === -1 || votacao.options.indexOf('Voto em Branco') === -1) && (
                         <View style={{width: '100%'}}>
                             <Button title="Adicionar Votos Brancos/Nulos" onPress={addBN} />
                         </View>

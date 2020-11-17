@@ -194,14 +194,15 @@ export default function Dados({ route, navigation }) {
 
         // Votos Nulos/Brancos
         if (!ir) {
-            const votoNulo = finalData.indexOf('Voto Nulo');
-            if (votoNulo !== -1) arr.splice(votoNulo, 1);
-            const votoBranco = finalData.indexOf('Voto em Branco');
-            if (votoBranco !== -1) arr.splice(votoBranco, 1);
+            const votoNulo = finalData.findIndex(data => data.title == 'Voto Nulo');
+            if (votoNulo !== -1) arr[votoNulo] = 0;
+            const votoBranco = finalData.findIndex(data => data.title == 'Voto em Branco');
+            if (votoBranco !== -1) arr[votoBranco] = 0;
         }
 
         const max = Math.max.apply(null, arr);
 
+        if (max == 0) return;
         if (arr.filter(v => v === max).length !== 1) return `Expate (${max} ponto(s))`;
         return finalData[arr.indexOf(max)].title;
     }
