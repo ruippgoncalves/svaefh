@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Token = require('../models/Token');
 
-// TODO: Validar na BD
 async function validarDB(token) {
     try {
         let dat = await Token.findOne({ token: token });
