@@ -56,6 +56,12 @@ export default function Gestao({ route, navigation }) {
         const timeout = setTimeout(async () => {
             if (votacao.over || votacao.running) return;
 
+            // Prevent No Name
+            if (votacao.name.length < 1) {
+                erro('Nome inválido, as definições da votação não serão sincronizados até o nome estar correto!');
+                return;
+            }
+
             // Prevent Sending Invalid Emails
             let send = false;
             votacao.allow.map(email => { send = send || email.indexOf('@') === -1 });
@@ -90,11 +96,21 @@ export default function Gestao({ route, navigation }) {
 
     // Add/Change Allow
     function acAllow(i, text) {
-        if (text.indexOf(';') > -1) {
-            // Remove Spaces
-            text = text.replace(/\s/g, '');
+        // Remove Spaces
+        text = text.replace(/\s/g, '');
 
+        if (text.indexOf(';') > -1) {
             const emails = text.split(';');
+            const state = { ...votacao };
+            state.allow = state.allow.concat(emails);
+
+            setVotacao(state);
+            setFocus('none');
+            return;
+        }
+
+        if (text.indexOf(',') > -1) {
+            const emails = text.split(',');
             const state = { ...votacao };
             state.allow = state.allow.concat(emails);
 
@@ -111,11 +127,10 @@ export default function Gestao({ route, navigation }) {
         setFocus('none');
     }
 
-    // Add Branco/Nulo
+    // Add Branco
     function addBN() {
         let state = {...votacao};
 
-        state.options[state.options.length] = 'Voto Nulo';
         state.options[state.options.length] = 'Voto em Branco';
 
         setVotacao(state);
@@ -131,7 +146,7 @@ export default function Gestao({ route, navigation }) {
                             {votacao.name}
                         </Text>
                     ) : (
-                            <TextInput autoFocus={true} numberOfLines={1} style={{ fontSize: 30 }} value={votacao.name} placeholder="Nome da Votação" onChangeText={text => setVotacao({ ...votacao, name: text })} />
+                            <TextInput autoFocus={true} numberOfLines={1} style={{ fontSize: 30, width: 'auto' }} value={votacao.name} placeholder="Nome da Votação" onChangeText={text => setVotacao({ ...votacao, name: text })} maxLength="50" />
                         )}
                     {!votacao.running && (
                         <TouchableOpacity onPress={() => setEditName(!editName)} >
@@ -142,9 +157,10 @@ export default function Gestao({ route, navigation }) {
             </View>
             <View style={{ maxHeight: '80%', maxWidth: '95%' }}>
                 <View>
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                         <Text style={{ marginRight: 10, fontWeight: 'bold' }}>Interno:</Text>
                         <Switch value={votacao.internal} onValueChange={() => setVotacao({ ...votacao, internal: !votacao.internal, allow: [] })} disabled={votacao.running} />
+                        <Text style={{ marginLeft: 10 }}>(Apenas para Alunos e Professores)</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ fontWeight: 'bold' }}>Tipo: </Text><Text style={{ marginRight: 10 }}>Escolha Múltipla (PV)</Text>
@@ -160,15 +176,15 @@ export default function Gestao({ route, navigation }) {
                     {!votacao.running && (
                         <TextInput key={votacao.options.length} placeholder={"Nova Opção"} onChangeText={text => { acOpt(votacao.options.length, text); setFocus('option'); }} />
                     )}
-                    {!votacao.running && !votacao.ir && (votacao.options.indexOf('Voto Nulo') === -1 || votacao.options.indexOf('Voto em Branco') === -1) && (
-                        <View style={{width: '100%'}}>
-                            <Button title="Adicionar Votos Brancos/Nulos" onPress={addBN} />
+                    {!votacao.running && !votacao.ir && votacao.options.indexOf('Voto em Branco') === -1 && (
+                        <View style={{width: '100%', marginTop: 5}}>
+                            <Button title="Adicionar Votos Brancos" onPress={addBN} />
                         </View>
                     )}
                 </ScrollView>
                 {(votacao.internal && !(votacao.running && votacao.allow.length == 0)) && (
-                    <ScrollView style={{ backgroundColor: 'white', padding: 10 }}>
-                        <Text style={{ fontWeight: 'bold' }}>Emails Permitidos (Deixe em braco para permitir todos):</Text>
+                    <ScrollView style={{ backgroundColor: 'white', padding: 10, marginBottom: 10 }}>
+                        <Text style={{ fontWeight: 'bold' }}>Emails Permitidos (Deixe em branco para permitir todos):</Text>
                         {votacao.allow.map((option, i) => (
                             <TextInput key={i} value={option} onChangeText={text => acAllow(i, text)} autoFocus={i === votacao.allow.length - 1 && focus === 'allow'} editable={!votacao.running} />
                         ))}
@@ -177,9 +193,14 @@ export default function Gestao({ route, navigation }) {
                         )}
                     </ScrollView>
                 )}
-            </View>
             <View style={styles.startOrResults}>
-                <Button title={votacao.running ? "Ver Resultados" : "Iniciar"} onPress={() => {if (votacao.options.length !== 0) navigation.navigate('Dados da Votação', { _id: _id, name: votacao.name, start: !votacao.running, over: votacao.running && ! votacao.code, ir: votacao.ir })}} />
+                <Button title={votacao.running ? "Ver Resultados" : "Iniciar"} onPress={() => {
+                    if (votacao.options.length !== 0) {
+                        navigation.navigate('Dados da Votação', { _id: _id, name: votacao.name, start: !votacao.running, over: votacao.running && ! votacao.code, ir: votacao.ir })
+                    } else {
+                        erro('Necessita de pelo menos uma opção!')
+                    }}} />
+            </View>
             </View>
         </View>
     )
@@ -195,8 +216,6 @@ const styles = StyleSheet.create({
         fontSize: 35
     },
     startOrResults: {
-        width: '100%',
-        position: 'absolute',
-        bottom: 0
+        width: '100%'
     }
 });

@@ -36,6 +36,13 @@ export default function Gestao({ navigation }) {
             .then(data => navigation.navigate('Editar Votação', data.data));
     }
 
+    // Get Data
+    function procData(dt) {
+        let data = new Date(dt).toISOString();
+
+        return data.replace(/T/, ', ').replace(/\..+/, '');
+    }
+
     return (
         <View style={mainStyles.container}>
             <View style={[mainStyles.bar, mainStyles.barRow]}>
@@ -47,7 +54,7 @@ export default function Gestao({ navigation }) {
                 {votacoes.map((votacao, i) => {
                     return (
                         <TouchableOpacity key={votacao._id} style={i % 2 === 0 ? [styles.btn, styles.btnG] : styles.btn} onPress={() => navigation.navigate('Editar Votação', votacao)}>
-                            <Text style={styles.btnTitle}>{votacao.name}</Text>
+                            <Text style={styles.btnTitle} numberOfLines="1">Nome: {votacao.name}, Criada a: {procData(votacao.createdAt)}</Text>
                         </TouchableOpacity>
                     )
                 })}

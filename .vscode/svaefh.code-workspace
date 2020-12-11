@@ -3,5 +3,8 @@
 		{
 			"path": "../"
 		}
-	]
+    ],
+    "settings": {
+        "editor.defaultFormatter": "vscode.emmet"
+    }
 }

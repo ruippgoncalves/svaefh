@@ -29,7 +29,6 @@ if (process.env.NODE_ENV === 'development') {
 // Routes
 app.use('/auth', require('./routes/auth'));
 app.use('/votacao', require('./routes/votacao'));
-app.use('/email', express.static('email'));
 
 // Listen on Port
 const port = process.env.PORT || 3000;

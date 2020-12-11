@@ -7,19 +7,19 @@ import Axios from 'axios';
 
 // Calculate IRV Winner
 const irv = (ballots) => {
-    const candidates = [... new Set(ballots.flat())]
+    const candidates = [... new Set(ballots.flat())];
     const votes = Object.entries(ballots.reduce(
         (votes, [v]) => { votes[v] += 1; return votes },
         Object.assign(...candidates.map(c => ({ [c]: 0 })))
-    ))
+    ));
     const [topCand, topCount] =
-        votes.reduce(([n, m], [v, c]) => c > m ? [v, c] : [n, m], ['?', -Infinity])
+        votes.reduce(([n, m], [v, c]) => c > m ? [v, c] : [n, m], ['?', -Infinity]);
     const [bottomCand, bottomCount] =
-        votes.reduce(([n, m], [v, c]) => c < m ? [v, c] : [n, m], ['?', Infinity])
+        votes.reduce(([n, m], [v, c]) => c < m ? [v, c] : [n, m], ['?', Infinity]);
 
     return topCount > ballots.length / 2
         ? topCand
-        : irv(ballots.map(ballot => ballot.filter(c => c != bottomCand)).filter(b => b.length > 0))
+        : irv(ballots.map(ballot => ballot.filter(c => c != bottomCand)).filter(b => b.length > 0));
 }
 
 export default function Dados({ route, navigation }) {
@@ -209,7 +209,7 @@ export default function Dados({ route, navigation }) {
 
     return (
         <View style={mainStyles.container}>
-            <View style={[mainStyles.bar, mainStyles.barRow]}>
+            <View style={[mainStyles.bar, mainStyles.barRow, { position: 'fixed', backgroundColor: 'rgb(242, 242, 242)' }]}>
                 <TouchableOpacity onPress={() => navigation.navigate('Editar Votação', { _id: _id, name: name })}>
                     <Text style={styles.barBtns}>&lt;</Text>
                 </TouchableOpacity>
@@ -236,7 +236,7 @@ export default function Dados({ route, navigation }) {
                     </ScrollView>
                     <Text style={{ fontSize: 18 }}>Total de Votos: {data.length}</Text>
                     {!over && (
-                        <Button title="Terminar" onPress={stop} />
+                        <Button title="Terminar Votação" onPress={stop} />
                     )}
                 </View>
             </View>

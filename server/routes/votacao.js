@@ -11,7 +11,7 @@ const email = require('../config/email');
 
 // Get Votacoes
 router.get('/obter', requireAuthCriar, (req, res) => {
-    Votacao.find({ createdBy: req.user._id }, { name: 1 }).sort({ _id: -1 }).exec((err, data) => {
+    Votacao.find({ createdBy: req.user._id }, { name: 1, createdAt: 1 }).sort({ _id: -1 }).exec((err, data) => {
         if (err) {
             console.error(err);
             return res.sendStatus(400);
@@ -65,6 +65,7 @@ router.post('/novo', requireAuthCriar, (req, res) => {
 // Change Votacao's options
 router.patch('/alterar', requireAuthCriar, [
     body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId().escape(),
+    body('update.name', 'name: String').isString().isLength({ min:1, max: 50 }),
     body('update.internal', 'internal: Boolean').optional({ nullable: true }).isBoolean().toBoolean(),
     body('update.ir', 'ir: Boolean').optional({ nullable: true }).isBoolean().toBoolean(),
     body('update.options', 'options: Array').isArray().toArray(),
@@ -147,7 +148,7 @@ router.post('/iniciar', requireAuthCriar, [
             res.json({ code: data.code });
 
             if (data.allow.length !== 0)
-                email(data.allow, data.code, 'Caros(as) alunos(as) e/ou professores(as),<br>Está a ser convidado para uma votação, use o código acima para poder votar.');
+                email(data.allow, data.code);
         });
     });
 });

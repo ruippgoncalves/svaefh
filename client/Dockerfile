@@ -18,6 +18,7 @@ COPY . .
 # Image Optimization and Build
 RUN npx expo-optimize@0.1.61
 RUN expo build:web --no-pwa
+COPY ./docker/email/* ./web-build/static/email/
 
 # Serve
 FROM nginx:1.19.4-alpine

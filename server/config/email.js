@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-function sendMail(sendTo, title, info) {
+function sendMail(sendTo, code) {
     transporter.sendMail({
         from: process.env.EMAIL,
         bcc: sendTo,
@@ -252,7 +252,7 @@ function sendMail(sendTo, title, info) {
                                                                                 <td>
                                                                                     <img alt="" class="img-max"
                                                                                         style="display: block; padding: 0; color: #3F3D33; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 500px;"
-                                                                                        src="${process.env.BACKEND + '/email/badge.png'}"
+                                                                                        src="${process.env.FRONTEND + '/static/email/badge.png'}"
                                                                                         width="500" border="0">
                                                                                 </td>
                                                                             </tr>
@@ -297,13 +297,13 @@ function sendMail(sendTo, title, info) {
                                                             <tr>
                                                                 <td class="padding-copy"
                                                                     style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #3F3D33; padding-top: 0px;"
-                                                                    align="center">${title}</td>
+                                                                    align="center">${code}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="padding-copy textlightStyle"
                                                                     style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #3F3D33;"
                                                                     align="center">
-                                                                    <p style="margin:0px;">${info}</p>
+                                                                    <p style="margin:0px;">Caros(as) alunos(as) e/ou professores(as),<br>Está a ser convidado para uma votação, use o código acima para poder votar.</p>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -333,14 +333,14 @@ function sendMail(sendTo, title, info) {
                                     align="center">
                                     <a target="_new"
                                         href="https://pt-pt.facebook.com/AgrupamentoDeEscolasFranciscoDeHolanda"><img
-                                            src="${process.env.BACKEND + '/email/facebook.png'}"
+                                            src="${process.env.FRONTEND + '/static/email/facebook.png'}"
                                             alt="Seguir no facebook" style="padding: 0 5px 0px 0px;" width="48"
                                             height="48"></a>
 
 
 
                                     <a target="_new" href="https://www.instagram.com/aefranciscoholanda/"><img
-                                            src="${process.env.BACKEND + '/email/instagram.png'}"
+                                            src="${process.env.FRONTEND + '/static/email/instagram.png'}"
                                             alt="Seguir no instagram" style="padding: 0 0px 0px 5px;" width="48"
                                             height="48"></a></td>
                             </tr>
