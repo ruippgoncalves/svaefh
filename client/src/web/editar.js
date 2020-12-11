@@ -79,7 +79,7 @@ export default function Gestao({ route, navigation }) {
                     update: votacao
                 }
             });
-        }, 500);
+        }, 2000);
 
         return () => clearTimeout(timeout);
     }, [votacao]);
