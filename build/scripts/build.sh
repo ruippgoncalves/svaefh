@@ -22,7 +22,7 @@ rm -R ./build/client/docker/email
 # Zip
 cp LICENSE build/
 cd build
-zip -r build.zip client data server docker-compose.yml LICENSE README.md
+zip -r build.zip client data server docker-compose.yml LICENSE README.md -x **/.git*
 cd ..
 
 echo "If Build is Incomplete:"

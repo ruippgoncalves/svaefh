@@ -56,25 +56,9 @@ Intruções:
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
     <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
-    <li>Copiar client/docker/nginx.example.conf para nginx.conf</li>
-    <li>Colocar os Ficheiros ssl.crt/ssl.key em client/docker</li>
-    <li>Executar o Comando: sudo docker-compose up -d</li>
+    <li>Execute num terminal linux ./build/scripts/build.sh</li>
+    <li>Envie o ficheiro build/build.zip para produção</li>
 </ol>
-
-Para Fins de Teste (Self-Signed Certificate):
-
-    openssl req -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out client/docker/ssl.crt -keyout client/docker/ssl.key
-
-CertBot (Let's Encrypt)
-
-    certbot certonly --manual -d mydomain.com
-    # Criar certificado sem a utilização de servidores adicionais:
-    # https://letsencrypt.org/docs/challenge-types/#http-01-challenge
-    # Colocar o token (acme-challenge) em client/docker/letsencrypt e executar sudo docker-compose up
-    # Apos a criação do certificado, precione ctrl + c para fechar o docker
-    # No passo 5 utilizar adicionalmente a flag --build, Ex: sudo docker-compose up -d --build
-    cp /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl.key
-    cp /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl.crt
 
 Em Adição, para Android e IOS, São Necessários:
 
