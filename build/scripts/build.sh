@@ -12,7 +12,8 @@ then
 fi
 
 # Build
-sudo docker build --output type=local,dest=./build/client/web -f ./build/scripts/Dockerfile.client ./client
+mkdir build/client/web
+sudo docker build -o ./build/client/web -f ./build/scripts/Dockerfile.client ./client
 sudo docker build -o ./build/server -f ./build/scripts/Dockerfile.server ./server
 
 cp ../../client/docker ../client
