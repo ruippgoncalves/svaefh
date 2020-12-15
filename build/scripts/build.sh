@@ -13,10 +13,16 @@ fi
 
 # Build
 sudo docker build --output type=local,dest=./build/client/web -f ./build/scripts/Dockerfile.client ./client
-sudo docker build --output type=local,dest=./build/server/server -f ./build/scripts/Dockerfile.server ./server
+sudo docker build -o ./build/server -f ./build/scripts/Dockerfile.server ./server
+
+cp ../../client/docker ../client
+rm -R ../client/docker/email
 
 # Zip
 cp LICENSE build/
 cd build
 zip -r build.zip client data server docker-compose.yml LICENSE README.md
 cd ..
+
+echo "If Build is Incomplete:"
+echo "  BuildKit needs to be enabled: https://docs.docker.com/develop/develop-images/build_enhancements/"

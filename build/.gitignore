@@ -1,4 +1,5 @@
 client/web
+client/docker
 server/server
 build.zip
 

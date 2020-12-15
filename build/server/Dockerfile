@@ -8,4 +8,4 @@ COPY . .
 
 # Expose Port and Start Server
 EXPOSE 3000
-CMD [ "server" ]
+CMD [ "./server" ]
