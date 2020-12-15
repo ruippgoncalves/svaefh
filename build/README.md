@@ -13,10 +13,11 @@ Para Fins de Teste (Self-Signed Certificate):
 
 CertBot (Let's Encrypt)
 
+    # Edite client/docker/nginx.conf
     certbot certonly --manual -d mydomain.com
     # https://letsencrypt.org/docs/challenge-types/#http-01-challenge
     # Colocar o token (acme-challenge) em client/docker/letsencrypt e executar sudo docker-compose up
     # Apos a criação do certificado, precione ctrl + c para fechar o docker
-    cp /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl.key
-    cp /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl.crt
+    cp /etc/letsencrypt/live/domain/privkey.pem client/docker/ssl/ssl.key
+    cp /etc/letsencrypt/live/domain/fullchain.pem client/docker/ssl/ssl.crt
     # No passo 5 utilizar adicionalmente a flag --build, Ex: sudo docker-compose up -d --build
