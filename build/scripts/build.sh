@@ -12,9 +12,11 @@ then
 fi
 
 # Build
-docker build --o ./build/client/web . - < ./build/scripts/Dockerfile.client
-docker build --o ./build/server/server . - < ./build/scripts/Dockerfile.server
+sudo docker build -o ./build/client/web - < ./build/scripts/Dockerfile.client
+sudo docker build -o ./build/server/server - < ./build/scripts/Dockerfile.server
 
 # Zip
 cp LICENSE build/
-zip -r build/build.zip build/client build/data build/server build/docker-compose.yml build/LICENSE build/README.md
+cd build
+zip -r build.zip client data server docker-compose.yml LICENSE README.md
+cd ..

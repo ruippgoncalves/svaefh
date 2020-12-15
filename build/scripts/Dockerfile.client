@@ -8,11 +8,11 @@ RUN npm i -g expo-cli@3.28.5
 RUN npm install -g sharp-cli@1.14.1 --unsafe-perm
 
 # Install svaefh Client Dependencies
-COPY ../../client/package*.json ./
+COPY ./client/package*.json ./
 RUN npm install
 
 # Bundle svaefh Source
-COPY ../../client/ .
+COPY ./client/ .
 
 # Image Optimization and Build
 RUN npx expo-optimize@0.1.61

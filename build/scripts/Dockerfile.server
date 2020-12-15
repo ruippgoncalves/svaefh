@@ -4,14 +4,14 @@ FROM node:14 AS build-stage
 WORKDIR /usr/src/svaefh
 
 # Install Nexe
-RUN npm i nexe -g
+RUN npm i nexe@3.3.7 -g
 
 # Install svaefh Server Dependencies
-COPY ../../server/package*.json ./
+COPY ./server/package*.json ./
 RUN npm install --only=production
 
 # Bundle svaefh Source
-COPY ../../server/ .
+COPY ./server/ .
 
 # Build
 RUN nexe server.js

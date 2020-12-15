@@ -4,6 +4,8 @@ client/docker/letsencrypt/*
 !client/docker/letsencrypt/.gitkeep
 
 client/web
+server/server
+build.zip
 
 LICENSE
 
