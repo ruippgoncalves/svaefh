@@ -14,8 +14,8 @@ RUN npm install --only=production
 COPY . .
 
 # Build
-RUN nexe app.js -t linux-x64-12.14.1
+RUN nexe app.js -r config/*.js -r config/config.env -r middleware/*.js -r models/*.js -r routes/*.js -t linux-x64-12.14.1 -o server
 
 # Copy to Build
 FROM scratch AS export-stage
-COPY --from=build-stage /usr/src/svaefh/app /
+COPY --from=build-stage /usr/src/svaefh/server /server
