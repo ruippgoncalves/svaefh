@@ -16,7 +16,7 @@ mkdir build/client/web
 sudo docker build -o ./build/client/web -f ./build/scripts/Dockerfile.client ./client
 sudo docker build -o ./build/server -f ./build/scripts/Dockerfile.server ./server
 
-cp ./client/docker ./build/client
+cp -r ./client/docker ./build/client
 rm -R ./build/client/docker/email
 
 # Zip
