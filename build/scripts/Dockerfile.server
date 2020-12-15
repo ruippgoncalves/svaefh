@@ -7,11 +7,11 @@ WORKDIR /usr/src/svaefh
 RUN npm i nexe@3.3.7 -g
 
 # Install svaefh Server Dependencies
-COPY server/package*.json ./
+COPY package*.json ./
 RUN npm install --only=production
 
 # Bundle svaefh Source
-COPY server/ .
+COPY . .
 
 # Build
 RUN nexe server.js
