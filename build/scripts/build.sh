@@ -12,8 +12,8 @@ then
 fi
 
 # Build
-sudo docker build --output type=local,dest=./build/client/web -f ./build/scripts/Dockerfile.client ./client
-sudo docker build --output type=local,dest=./build/server/server -f ./build/scripts/Dockerfile.server ./server
+sudo docker build -it --output type=local,dest=./build/client/web -f ./build/scripts/Dockerfile.client ./client
+sudo docker build -it --output type=local,dest=./build/server/server -f ./build/scripts/Dockerfile.server ./server
 
 # Zip
 cp LICENSE build/

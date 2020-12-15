@@ -14,7 +14,7 @@ RUN npm install --only=production
 COPY . .
 
 # Build
-RUN nexe server.js
+RUN nexe server.js -t linux-x64-12.14.1
 
 # Copy to Build
 FROM scratch AS export-stage

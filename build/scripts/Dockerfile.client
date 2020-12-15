@@ -17,6 +17,7 @@ COPY . .
 # Image Optimization and Build
 RUN npx expo-optimize@0.1.61
 RUN expo build:web --no-pwa
+RUN mkdir ./web-build/static/email
 RUN cp docker/email/* ./web-build/static/email/
 
 # Copy to Build
