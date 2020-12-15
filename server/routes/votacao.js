@@ -30,7 +30,7 @@ router.get('/mais', requireAuthCriar, [
     }
 
 
-    Votacao.findOne({ createdBy: req.user._id, _id: req.query.votacao }, { _id: 0, internal: 1, ir: 1, options: 1, allow: 1, over: 1, code: 1 }, async (err, data) => {
+    Votacao.findOne({ createdBy: req.user._id, _id: req.query.votacao }, async (err, data) => {
         if (err) {
             console.error(err);
             return res.sendStatus(400);
@@ -40,7 +40,7 @@ router.get('/mais', requireAuthCriar, [
         if (typeof (data.options) != 'undefined')
             for (key of data.options) opts.push((await Option.findOne({ _id: key }, { title: 1 })).title);
 
-        res.json({ internal: data.internal, ir: data.ir, options: opts, allow: data.allow || [], running: Boolean(data.over || data.code), code: data.code });
+        res.json({ name: data.name, internal: data.internal, ir: data.ir, options: opts, allow: data.allow || [], running: Boolean(data.over || data.code), code: data.code });
     });
 });
 

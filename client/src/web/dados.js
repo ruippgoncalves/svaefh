@@ -210,7 +210,7 @@ export default function Dados({ route, navigation }) {
     return (
         <View style={mainStyles.container}>
             <View style={[mainStyles.bar, mainStyles.barRow, { position: 'fixed', backgroundColor: 'rgb(242, 242, 242)' }]}>
-                <TouchableOpacity onPress={() => navigation.navigate('Editar Votação', { _id: _id, name: name })}>
+                <TouchableOpacity onPress={() => navigation.navigate('Editar Votação', { _id: _id })}>
                     <Text style={styles.barBtns}>&lt;</Text>
                 </TouchableOpacity>
                 <View style={styles.barTitle}>

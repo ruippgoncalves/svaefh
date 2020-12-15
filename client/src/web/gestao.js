@@ -47,7 +47,7 @@ export default function Gestao({ navigation }) {
         <View style={mainStyles.container}>
             <View style={[mainStyles.bar, mainStyles.barRow]}>
                 <TouchableOpacity onPress={() => navigation.navigate('Iniciar Sessão')}><Text style={styles.barBtns}>&lt;</Text></TouchableOpacity>
-                <Text numberOfLines={1} style={styles.barTitle}>Gestao de Votações</Text>
+                <Text numberOfLines={1} style={styles.barTitle}>Gerir de Votações</Text>
                 <TouchableOpacity onPress={addVotacao}><Text style={styles.barBtns}>+</Text></TouchableOpacity>
             </View>
             <ScrollView style={styles.scroll}>

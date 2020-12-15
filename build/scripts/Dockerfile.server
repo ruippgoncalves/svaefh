@@ -1,0 +1,21 @@
+FROM node:14 AS build-stage
+
+# Create svaefh directory
+WORKDIR /usr/src/svaefh
+
+# Install Nexe
+RUN npm i nexe -g
+
+# Install svaefh Server Dependencies
+COPY ../../server/package*.json ./
+RUN npm install --only=production
+
+# Bundle svaefh Source
+COPY ../../server/ .
+
+# Build
+RUN nexe server.js
+
+# Copy to Build
+FROM scratch AS export-stage
+COPY --from=build-stage /usr/src/svaefh/server /

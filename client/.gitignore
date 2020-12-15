@@ -1,21 +1,9 @@
-node_modules/**/*
-.expo/*
+node_modules
+.expo
 npm-debug.*
-*.log
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.orig.*
 web-build/
 confi.env
 app.json
-
-docker/ssl.*
-docker/nginx.conf
-docker/letsencrypt/*
-!docker/letsencrypt/.gitkeep
 
 # macOS
 .DS_Store

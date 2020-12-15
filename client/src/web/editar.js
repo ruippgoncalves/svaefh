@@ -6,7 +6,7 @@ import mainStyles from '../styles/main';
 import Axios from 'axios';
 
 export default function Gestao({ route, navigation }) {
-    const { _id, name } = route.params;
+    const { _id } = route.params;
     const [votacao, setVotacao] = React.useState({ name: '', options: [] });
     const [editName, setEditName] = React.useState(false);
     const [focus, setFocus] = React.useState('none');
@@ -21,21 +21,20 @@ export default function Gestao({ route, navigation }) {
     }
 
     // Get More Data
+    async function getData() {
+        await Axios({
+            method: 'GET',
+            url: `${Constants.manifest.extra.API}/votacao/mais`,
+            headers: { Authorization: 'Bearer ' + await AsyncStorage.getItem('@user') },
+            params: {
+                votacao: _id
+            }
+        })
+            .then(data => data.data)
+            .then(data => { if (data.name == 'Votação' && !data.running) setEditName(true); return data; })
+            .then(data => setVotacao(data));
+    }
     React.useEffect(() => {
-        const getData = async () => {
-            await Axios({
-                method: 'GET',
-                url: `${Constants.manifest.extra.API}/votacao/mais`,
-                headers: { Authorization: 'Bearer ' + await AsyncStorage.getItem('@user') },
-                params: {
-                    votacao: _id
-                }
-            })
-                .then(data => data.data)
-                .then(data => { return { ...data, name: name } })
-                .then(data => setVotacao(data));
-        }
-
         const unsubscribe = navigation.addListener('focus', () => {
             getData();
         });
@@ -129,7 +128,7 @@ export default function Gestao({ route, navigation }) {
 
     // Add Branco
     function addBN() {
-        let state = {...votacao};
+        let state = { ...votacao };
 
         state.options[state.options.length] = 'Voto em Branco';
 
@@ -177,7 +176,7 @@ export default function Gestao({ route, navigation }) {
                         <TextInput key={votacao.options.length} placeholder={"Nova Opção"} onChangeText={text => { acOpt(votacao.options.length, text); setFocus('option'); }} />
                     )}
                     {!votacao.running && !votacao.ir && votacao.options.indexOf('Voto em Branco') === -1 && (
-                        <View style={{width: '100%', marginTop: 5}}>
+                        <View style={{ width: '100%', marginTop: 5 }}>
                             <Button title="Adicionar Votos Brancos" onPress={addBN} />
                         </View>
                     )}
@@ -193,14 +192,15 @@ export default function Gestao({ route, navigation }) {
                         )}
                     </ScrollView>
                 )}
-            <View style={styles.startOrResults}>
-                <Button title={votacao.running ? "Ver Resultados" : "Iniciar"} onPress={() => {
-                    if (votacao.options.length !== 0) {
-                        navigation.navigate('Dados da Votação', { _id: _id, name: votacao.name, start: !votacao.running, over: votacao.running && ! votacao.code, ir: votacao.ir })
-                    } else {
-                        erro('Necessita de pelo menos uma opção!')
-                    }}} />
-            </View>
+                <View style={styles.startOrResults}>
+                    <Button title={votacao.running ? "Ver Resultados" : "Iniciar"} onPress={() => {
+                        if (votacao.options.length !== 0) {
+                            navigation.navigate('Dados da Votação', { _id: _id, name: votacao.name, start: !votacao.running, over: votacao.running && !votacao.code, ir: votacao.ir })
+                        } else {
+                            erro('Necessita de pelo menos uma opção!')
+                        }
+                    }} />
+                </View>
             </View>
         </View>
     )

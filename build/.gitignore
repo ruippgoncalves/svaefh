@@ -1,0 +1,11 @@
+client/docker/ssl.*
+client/docker/nginx.conf
+client/docker/letsencrypt/*
+!client/docker/letsencrypt/.gitkeep
+
+client/web
+
+LICENSE
+
+# macOS
+.DS_Store
