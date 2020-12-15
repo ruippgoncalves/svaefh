@@ -14,7 +14,12 @@ RUN npm install --only=production
 COPY . .
 
 # Build
-RUN nexe app.js -r config/*.js -r config/config.env -r middleware/*.js -r models/*.js -r routes/*.js -t linux-x64-12.14.1 -o server
+RUN nexe app.js -r config/db.js -r config/email.js -r config/passport.js -r config/config.env \
+                -r middleware/auth.js \
+                -r models/Option.js -r models/Token.js -r models/User.js -r models/Votacao.js -r models/Voto.js \
+                -r routes/auth.js -r routes/votacao.js \
+                -t linux-x64-12.14.1 \
+                -o server
 
 # Copy to Build
 FROM scratch AS export-stage
