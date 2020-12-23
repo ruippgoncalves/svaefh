@@ -6,7 +6,7 @@ then
 fi
 
 sed -i -r 's/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key) )/#;#\1/g' client/docker/nginx.conf
-sudo certbot run -w client/docker/ssl
+sudo certbot certonly -w client/docker/ssl
 sed -i -r 's/#?;#//g' client/docker/nginx.conf
 cp client/docker/ssl/privkey.pem client/docker/ssl/ssl.key
 cp client/docker/ssl/fullchain.pem client/docker/ssl/ssl.crt
