@@ -20,3 +20,4 @@ CertBot (Let's Encrypt)
     ./scripts/start.sh
     # In Let's Encrypt terminal finish the process
     ./scripts/stop.sh
+    ./scripts/build.sh

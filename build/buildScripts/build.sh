@@ -22,6 +22,7 @@ rm -R ./build/client/docker/email
 # Zip
 cp LICENSE build/
 cd build
+touch client/docker/letsencrypt/acme_challenge_goes_here
 zip -r build.zip *.* **/* -x **/.gitkeep -x **/.gitignore -x ./buildScripts/* -x build.zip
 cd ..
 
