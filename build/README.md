@@ -4,8 +4,8 @@ Instruções:
 
 <ol>
     <li>Colocar os Ficheiros ssl.crt/ssl.key em client/docker/ssl ou guias a baixo</li>
-    <li>Executar o Comando: ./scripts/start.sh</li>
-    <li>Para parar Execute o Comando: ./scripts/stop.sh</li>
+    <li>Iniciar o Servidor Execute o Comando: ./scripts/start.sh</li>
+    <li>Para Parar o Servidor Execute o Comando: ./scripts/stop.sh</li>
 </ol>
 
 Para Fins de Teste (Self-Signed Certificate):

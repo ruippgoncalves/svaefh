@@ -22,7 +22,7 @@ rm -R ./build/client/docker/email
 # Zip
 cp LICENSE build/
 cd build
-zip -r build.zip *.* **/*.* -x **/.gitkeep -x **/.gitignore -x buildScripts -x build.zip
+zip -r build.zip *.* **/* -x **/.gitkeep -x **/.gitignore -x ./buildScripts/* -x build.zip
 cd ..
 
 echo "If Build is Incomplete:"

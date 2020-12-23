@@ -5,7 +5,10 @@ then
     exit
 fi
 
+read -p 'Domain: ' Domain
+read -p 'Email: ' Email
+
 sed -i -r 's/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key) )/#;#\1/g' client/docker/nginx.conf
-sudo certbot certonly --webroot -d example.com --email info@example.com -w client/docker/ssl -n --agree-tos --force-renewal
+sudo certbot certonly --webroot -d $Domain --email $Email -w client/docker/ssl -n --agree-tos --force-renewal
 sed -i -r 's/#?;#//g' client/docker/nginx.conf
 ./scripts/build.sh
