@@ -54,7 +54,7 @@ export default function Gestao({ navigation }) {
                 {votacoes.map((votacao, i) => {
                     return (
                         <TouchableOpacity key={votacao._id} style={i % 2 === 0 ? [styles.btn, styles.btnG] : styles.btn} onPress={() => navigation.navigate('Editar Votação', votacao)}>
-                            <Text style={styles.btnTitle} numberOfLines="1">Nome: {votacao.name}, Criada a: {procData(votacao.createdAt)}</Text>
+                            <Text style={styles.btnTitle} numberOfLines={1}>Nome: {votacao.name}, Criada a: {procData(votacao.createdAt)}</Text>
                         </TouchableOpacity>
                     )
                 })}
@@ -74,9 +74,10 @@ const styles = StyleSheet.create({
     },
     scroll: {
         position: 'absolute',
-        top: 50,
-        bottom: 0,
-        width: '100%'
+        top: 70,
+        bottom: 20,
+        width: '50%',
+        minWidth: 350
     },
     btn: {
         padding: 10,
@@ -87,6 +88,8 @@ const styles = StyleSheet.create({
     },
     btnTitle: {
         color: '#000000',
-        fontWeight: '700'
+        fontWeight: '700',
+        paddingLeft: 5,
+        paddingRight: 5
     }
 });

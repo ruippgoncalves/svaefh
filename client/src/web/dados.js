@@ -29,6 +29,7 @@ export default function Dados({ route, navigation }) {
     const [QRCodeURI, setQRCodeURI] = React.useState(null);
     const [code, setCode] = React.useState(null);
     const [finalData, setFinalData] = React.useState([]);
+    // TODO: Grahic
 
     // Get Options
     React.useEffect(() => {

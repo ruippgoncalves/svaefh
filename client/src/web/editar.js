@@ -10,6 +10,7 @@ export default function Gestao({ route, navigation }) {
     const [votacao, setVotacao] = React.useState({ name: '', options: [] });
     const [editName, setEditName] = React.useState(false);
     const [focus, setFocus] = React.useState('none');
+    // TODO: Timer
 
     // Erro
     function erro(msg) {

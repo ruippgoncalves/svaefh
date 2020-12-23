@@ -36,7 +36,7 @@ As principais funcionalidades:
 - Diferentes Métodos de Votação:
   - Escolha Múltipla (Plurality Voting)
   - Escolha Classificada (Instant-Runoff Voting)
-- Utilização na Comunidade Escolar (Alunos e Professores) com Prevenção de Multiplos Votos e Utilização External sem Prevenção de Multiplos Votos
+- Utilização na Comunidade Escolar (Alunos e Professores) com Prevenção de Multiplos Votos e Utilização Externa sem Prevenção de Multiplos Votos
 - Restrição de Eleitores (Interno)
 - QRCode para a Eleição
 - Dados em Tempo Real
@@ -56,7 +56,7 @@ Intruções:
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
     <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
-    <li>Execute num terminal linux ./build/scripts/build.sh</li>
+    <li>Execute num terminal linux ./build/buildScripts/build.sh</li>
     <li>Envie o ficheiro build/build.zip para produção</li>
 </ol>
 
@@ -85,3 +85,4 @@ Adicionalmente:
 - Docker
 - Nginx
 - Mosaico
+- DigitalOcean NGINXConfig Tool 

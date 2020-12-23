@@ -1,4 +1,4 @@
-FROM node:14
+FROM alpine:3.12.3
 
 # Create svaefh directory
 WORKDIR /usr/src/svaefh
