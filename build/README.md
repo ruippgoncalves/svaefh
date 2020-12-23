@@ -15,3 +15,8 @@ Para Fins de Teste (Self-Signed Certificate):
 CertBot (Let's Encrypt)
 
     ./scripts/letsencrypt.sh
+    # When ACME Challenge, in a new terminal
+    ./scripts/build.sh
+    ./scripts/start.sh
+    # In Let's Encrypt terminal finish the process
+    ./scripts/stop.sh
