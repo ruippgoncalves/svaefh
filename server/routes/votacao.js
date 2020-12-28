@@ -65,7 +65,7 @@ router.post('/novo', requireAuthCriar, (req, res) => {
 // Change Votacao's options
 router.patch('/alterar', requireAuthCriar, [
     body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId().escape(),
-    body('update.name', 'name: String').isString().isLength({ min:1, max: 50 }),
+    body('update.name', 'name: String').isString().isLength({ min: 1, max: 50 }),
     body('update.internal', 'internal: Boolean').optional({ nullable: true }).isBoolean().toBoolean(),
     body('update.ir', 'ir: Boolean').optional({ nullable: true }).isBoolean().toBoolean(),
     body('update.options', 'options: Array').isArray().toArray(),
@@ -120,6 +120,27 @@ router.patch('/alterar', requireAuthCriar, [
 
             res.sendStatus(data ? 200 : 400);
         });
+    });
+});
+
+router.delete('/apagar', requireAuthCriar, [
+    body('votacao', 'Código de Votação Inválido ou Inexistente!').isMongoId()
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    Votacao.findOne({ _id: req.body.votacao, createdBy: req.user._id }, async (err, data) => {
+        if (err || !data) {
+            return res.sendStatus(400);
+        }
+
+        await Voto.deleteMany({ votacao: req.body.votacao });
+        await Option.deleteMany({ votacao: req.body.votacao });
+        await Votacao.deleteOne({ _id: req.body.votacao });
+
+        return res.sendStatus(200);
     });
 });
 

@@ -29,7 +29,6 @@ export default function Dados({ route, navigation }) {
     const [QRCodeURI, setQRCodeURI] = React.useState(null);
     const [code, setCode] = React.useState(null);
     const [finalData, setFinalData] = React.useState([]);
-    // TODO: Grahic
 
     // Get Options
     React.useEffect(() => {
@@ -204,14 +203,14 @@ export default function Dados({ route, navigation }) {
         const max = Math.max.apply(null, arr);
 
         if (max == 0) return;
-        if (arr.filter(v => v === max).length !== 1) return `Expate (${max} ponto(s))`;
+        if (arr.filter(v => v === max).length !== 1) return `Empate (${max} ponto(s))`;
         return finalData[arr.indexOf(max)].title;
     }
 
     return (
         <View style={mainStyles.container}>
             <View style={[mainStyles.bar, mainStyles.barRow, { position: 'fixed', backgroundColor: 'rgb(242, 242, 242)' }]}>
-                <TouchableOpacity onPress={() => navigation.navigate('Editar Votação', { _id: _id })}>
+                <TouchableOpacity onPress={() => navigation.navigate('Editar Votação', { _id })}>
                     <Text style={styles.barBtns}>&lt;</Text>
                 </TouchableOpacity>
                 <View style={styles.barTitle}>

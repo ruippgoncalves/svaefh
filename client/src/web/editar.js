@@ -10,7 +10,6 @@ export default function Gestao({ route, navigation }) {
     const [votacao, setVotacao] = React.useState({ name: '', options: [] });
     const [editName, setEditName] = React.useState(false);
     const [focus, setFocus] = React.useState('none');
-    // TODO: Timer
 
     // Erro
     function erro(msg) {
@@ -136,6 +135,19 @@ export default function Gestao({ route, navigation }) {
         setVotacao(state);
     }
 
+    // Delete Votacao
+    async function deleteVotacao() {
+        await Axios({
+            method: 'DELETE',
+            url: `${Constants.manifest.extra.API}/votacao/apagar`,
+            headers: { Authorization: 'Bearer ' + await AsyncStorage.getItem('@user') },
+            data: {
+                votacao: _id
+            }
+        })
+            .then(() => navigation.navigate('Gerir Votações'));
+    }
+
     return (
         <View style={mainStyles.container}>
             <View style={[mainStyles.bar, mainStyles.barRow]}>
@@ -154,6 +166,7 @@ export default function Gestao({ route, navigation }) {
                         </TouchableOpacity>
                     )}
                 </View>
+                <TouchableOpacity onPress={() => deleteVotacao()}><Text style={styles.barBtns}>&#128465;</Text></TouchableOpacity>
             </View>
             <View style={{ maxHeight: '80%', maxWidth: '95%' }}>
                 <View>

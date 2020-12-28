@@ -12,20 +12,34 @@ WebBrowser.maybeCompleteAuthSession();
 export default function WithGoogle(props) {
     const [loggedIn, setLogged] = React.useState(false);
 
+    // Erro
+    function erro(msg) {
+        if (Platform.OS == 'web') {
+            return window.alert(msg);
+        } else {
+            return Alert.alert("Erro", msg);
+        }
+    }
+
     // Handles login
     async function login() {
-        const data = await AuthSession.startAsync({ authUrl: `${Constants.manifest.extra.API}/auth/google`, returnUrl: AuthSession.makeRedirectUri() })
+        let data;
+
+        try {
+            data = await AuthSession.startAsync({
+                authUrl: `${Constants.manifest.extra.API}/auth/google`,
+                returnUrl: AuthSession.makeRedirectUri()
+            })
+        } catch {
+            return erro('Não foi possivel fazer Login, se estiver a utilizar telemóvel/tablet descarregue a aplicação.');
+        }
 
         if (data.type != 'success') return;
 
         // To close the new window first
         setTimeout(async () => {
             if (data.params.error != undefined) {
-                if (Platform.OS == 'web') {
-                    window.alert('Endereço de email inválido. Por favor inicie sessão com a sua conta de email institucional!');
-                } else {
-                    Alert.alert('Erro', 'Endereço de email inválido. Por favor inicie sessão com a sua conta de email institucional!');
-                }
+                erro('Endereço de email inválido. Por favor inicie sessão com a sua conta de email institucional!');
 
                 return;
             }

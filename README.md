@@ -85,4 +85,4 @@ Adicionalmente:
 - Docker
 - Nginx
 - Mosaico
-- DigitalOcean NGINXConfig Tool 
+- DigitalOcean NGINXConfig Tool
