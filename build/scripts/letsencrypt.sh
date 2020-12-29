@@ -5,7 +5,7 @@ then
     exit
 fi
 
-read 'Domain: ' Domain
+read -p 'Domain: ' Domain
 
 sed -i -r 's/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key) )/#;#\1/g' client/docker/nginx.conf
 sudo certbot certonly --manual -d $Domain
