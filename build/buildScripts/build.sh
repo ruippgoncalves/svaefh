@@ -11,6 +11,27 @@ then
     exit
 fi
 
+# Delete Previous build files
+if test -d "build/client/web"; then
+    rm -R build/client/web
+fi
+
+if test -f "build/server/server"; then
+    rm build/server/server
+fi
+
+if test -d "build/client/docker/"; then
+    rm -R build/client/docker
+fi
+
+if test -f "build/LICENSE"; then
+    rm build/LICENSE
+fi
+
+if test -f "build/build.zip"; then
+    rm build/build.zip
+fi
+
 # Build
 mkdir build/client/web
 sudo docker build -o ./build/client/web -f ./build/buildScripts/Dockerfile.client ./client
@@ -23,7 +44,7 @@ rm -R ./build/client/docker/email
 cp LICENSE build/
 cd build
 touch client/docker/letsencrypt/acme_challenge_goes_here
-zip -r build.zip *.* **/* -x **/.gitkeep -x **/.gitignore -x ./buildScripts/* -x build.zip
+zip -r build.zip * -x **/.gitkeep **/.gitignore ./buildScripts/\*
 cd ..
 
 echo "If Build is Incomplete:"
