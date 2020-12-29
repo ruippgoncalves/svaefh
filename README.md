@@ -79,6 +79,7 @@ BackEnd:
 - Passport.JS
 - Json Web Token
 - Mongoose
+- Webpack
 
 Adicionalmente:
 - MongoDB
