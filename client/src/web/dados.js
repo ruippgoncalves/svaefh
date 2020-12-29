@@ -6,6 +6,9 @@ import mainStyles from '../styles/main';
 import Axios from 'axios';
 
 // Calculate IRV Winner
+// Code by Scott Sauyet
+// https://stackoverflow.com/questions/64730987/instant-runoff-voting-in-javascript-with-additional-votes
+// Consulted at 9 Nov 2020
 const irv = (ballots) => {
     const candidates = [... new Set(ballots.flat())];
     const votes = Object.entries(ballots.reduce(
@@ -17,6 +20,9 @@ const irv = (ballots) => {
     const [bottomCand, bottomCount] =
         votes.reduce(([n, m], [v, c]) => c < m ? [v, c] : [n, m], ['?', Infinity]);
 
+    // If we want to track tie, instead of returning topCand, do this:
+    //  topCount === bottomCount ? [topCand, bottomCand] : [topCand]
+    // PS: the code need to chage, as the winner (if not a tie) would be irv(ballots)[0];
     return topCount > ballots.length / 2
         ? topCand
         : irv(ballots.map(ballot => ballot.filter(c => c != bottomCand)).filter(b => b.length > 0));
