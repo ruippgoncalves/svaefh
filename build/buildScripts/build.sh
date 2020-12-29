@@ -13,11 +13,11 @@ fi
 
 # Delete Previous build files
 if test -d "build/client/web"; then
-    rm -R build/client/web
+    sudo rm -R build/client/web
 fi
 
 if test -f "build/server/server"; then
-    rm build/server/server
+    sudo rm build/server/server
 fi
 
 if test -d "build/client/docker/"; then
