@@ -8,18 +8,16 @@ RUN npm i nexe@3.3.7 -g
 
 # Install svaefh Server Dependencies
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install
 
 # Bundle svaefh Source
 COPY . .
 
+# Bundle
+RUN npm run build
+
 # Build
-RUN nexe app.js -r config/db.js -r config/email.js -r config/passport.js -r config/config.env \
-                -r middleware/auth.js \
-                -r models/Option.js -r models/Token.js -r models/User.js -r models/Votacao.js -r models/Voto.js \
-                -r routes/auth.js -r routes/votacao.js \
-                -t linux-x64-12.14.1 \
-                -o server
+RUN nexe dist/server.min.js -t linux-x64-12.14.1 -o server
 
 # Copy to Build
 FROM scratch AS export-stage

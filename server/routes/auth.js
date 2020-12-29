@@ -18,7 +18,7 @@ async function genToken(user) {
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Google Auth Callback
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/auth/error' }), async (req, res) => {
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: `${process.env.BACKEND}/auth/error` }), async (req, res) => {
     if (/Android|iPhone|iPad/i.test(req.headers["user-agent"])) {
         res.redirect(`${process.env.MOBILE}?user=` + await genToken(req.user));
     } else {

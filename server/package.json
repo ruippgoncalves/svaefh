@@ -2,7 +2,8 @@
     "main": "app.js",
     "scripts": {
         "start": "cross-env NODE_ENV=production node app.js",
-        "dev": "cross-env NODE_ENV=development nodemon app.js"
+        "dev": "cross-env NODE_ENV=development nodemon app.js",
+        "build": "webpack"
     },
     "dependencies": {
         "cors": "^2.8.5",
@@ -19,7 +20,9 @@
         "qrcode": "^1.4.4"
     },
     "devDependencies": {
-        "nodemon": "^2.0.5"
+        "nodemon": "^2.0.5",
+        "webpack": "^5.11.1",
+        "webpack-dotenv-plugin": "^2.1.0"
     },
     "private": true
 }

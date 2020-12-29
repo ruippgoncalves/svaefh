@@ -1,5 +1,6 @@
 node_modules
 config.env
+dist
 
 # macOS
 .DS_Store
