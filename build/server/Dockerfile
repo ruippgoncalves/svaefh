@@ -1,4 +1,4 @@
-FROM alpine:3.12.3
+FROM debian:stable-20201209-slim
 
 # Create svaefh directory
 WORKDIR /usr/src/svaefh
