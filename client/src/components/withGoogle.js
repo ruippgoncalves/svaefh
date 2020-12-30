@@ -31,7 +31,7 @@ export default function WithGoogle(props) {
                 returnUrl: AuthSession.makeRedirectUri()
             })
         } catch {
-            return erro('Não foi possivel fazer Login, se estiver a utilizar telemóvel/tablet descarregue a aplicação.');
+            return erro('Não foi possivel iniciar sessão, se estiver a utilizar telemóvel ou tablet descarregue a aplicação.');
         }
 
         if (data.type != 'success') return;
