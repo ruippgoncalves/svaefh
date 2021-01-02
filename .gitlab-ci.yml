@@ -8,7 +8,7 @@ before_script:
 
 build:
     script:
-        - sudo apt-get install zip
+        - apk --no-cache add zip
 
         - echo "MONGO_URI = mongodb://mongodb:27017/sistemaVotacaoAEFH" > server/config/config.env
         - echo "GOOGLE_CLIENT_ID = $GOOGLE_CLIENT_ID" >> server/config/config.env
