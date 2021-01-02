@@ -46,6 +46,3 @@ cd build
 touch client/docker/letsencrypt/acme_challenge_goes_here
 zip -r build.zip * -x **/.gitkeep **/.gitignore ./buildScripts/\*
 cd ..
-
-echo "If Build is Incomplete:"
-echo "  BuildKit needs to be enabled: https://docs.docker.com/develop/develop-images/build_enhancements/"

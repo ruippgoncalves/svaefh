@@ -13,3 +13,4 @@ WORKDIR /usr/src/svaefh
 
 # Bundle svaefh Source
 COPY ./web/ .
+RUN chown -R nginx .
