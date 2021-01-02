@@ -110,7 +110,7 @@ router.patch('/alterar', requireAuthCriar, [
 
         // Update allow
         if (update.allow.length != 0) {
-            update.allow.map((key, i) => update.allow[i] = key.toUpperCase());
+            update.allow.map((key, i) => update.allow[i] = key.toLowerCase());
         }
 
         await Votacao.findOneAndUpdate({ createdBy: req.user._id, _id: req.body.votacao }, update, (err, data) => {

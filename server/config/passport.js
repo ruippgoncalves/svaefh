@@ -26,7 +26,7 @@ module.exports = passport => {
             // Create an user
             const newUser = new User({
                 googleID: profile.id,
-                email: email[0].toUpperCase(),
+                email: email[0].toLowerCase(),
                 criarVotacao: email[1] === emails[1] ? true : false
             });
 
