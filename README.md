@@ -67,6 +67,22 @@ Em Adição, para Android e IOS, São Necessários:
 
 Mais Informações de como Criar as Aplicações em https://docs.expo.io/workflow/publishing/
 
+##
+
+Variáveis para o Gitlab CI/CD:
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+- EMAIL
+- PASSWORD
+- STUDENTS_EMAIL
+- TEACHERS_EMAIL
+- FRONTEND
+- MOBILE
+- BACKEND
+- TOKEN
+
+Ver server/config/config.example.env para mais detalhes
+
 ## Tecnologias Utilizadas
 
 As principais tecnologias:
@@ -87,3 +103,4 @@ Adicionalmente:
 - Nginx
 - Mosaico
 - DigitalOcean NGINXConfig Tool
+- Gitlab CI/CD

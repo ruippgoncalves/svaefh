@@ -34,8 +34,8 @@ fi
 
 # Build
 mkdir build/client/web
-sudo docker build -o ./build/client/web -f ./build/buildScripts/Dockerfile.client ./client
-sudo docker build -o ./build/server -f ./build/buildScripts/Dockerfile.server ./server
+DOCKER_BUILDKIT=1 sudo docker build -o ./build/client/web -f ./build/buildScripts/Dockerfile.client ./client
+DOCKER_BUILDKIT=1 sudo docker build -o ./build/server -f ./build/buildScripts/Dockerfile.server ./server
 
 cp -r ./client/docker ./build/client
 rm -R ./build/client/docker/email
