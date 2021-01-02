@@ -1,0 +1,26 @@
+stages:
+    - build
+
+build:
+    script:
+        - echo "MONGO_URI = mongodb://mongodb:27017/sistemaVotacaoAEFH" > server/config/config.env
+        - echo "GOOGLE_CLIENT_ID = $GOOGLE_CLIENT_ID" >> server/config/config.env
+        - echo "GOOGLE_CLIENT_SECRET = $GOOGLE_CLIENT_SECRET" >> server/config/config.env
+        - echo "EMAIL = $EMAIL" >> server/config/config.env
+        - echo "PASSWORD = $PASSWORD" >> server/config/config.env
+        - echo "STUDENTS_EMAIL = $STUDENTS_EMAIL" >> server/config/config.env
+        - echo "TEACHERS_EMAIL = $TEACHERS_EMAIL" >> server/config/config.env
+        - echo "FRONTEND = $FRONTEND" >> server/config/config.env
+        - echo "MOBILE = $MOBILE" >> server/config/config.env
+        - echo "BACKEND = $BACKEND" >> server/config/config.env
+        - echo "TOKEN = $TOKEN" >> server/config/config.env
+
+        - echo "{\"expo\":{\"scheme\":\"svaefh\",\"name\":\"Sistema de Vota\u00E7\u00E3o AEFH\",\"slug\":\"svaefh\",\"version\":\"1.0.0\",\"orientation\":\"portrait\",\"icon\":\".\/assets\/icon.png\",\"githubUrl\":\"https:\/\/github.com\/ruippgoncalves\/svaefh\",\"privacy\":\"hidden\",\"splash\":{\"image\":\".\/assets\/splash.png\",\"resizeMode\":\"contain\",\"backgroundColor\":\"#05738C\"},\"platforms\":[\"ios\",\"android\",\"web\"],\"updates\":{\"fallbackToCacheTimeout\":0},\"assetBundlePatterns\":[\"**\/*\"],\"ios\":{\"supportsTablet\":true,\"bundleIdentifier\":\"pt.aefh.svaefh\"},\"android\":{\"package\":\"pt.aefh.svaefh\"},\"web\":{\"favicon\":\".\/assets\/favicon.png\",\"lang\":\"pt\",\"description\":\"Sistema de Vota\u00E7\u00E3o AEFH\"},\"extra\":{\"API\":\"$BACKEND\"}}}" > client/app.json
+
+        - ./build/buildScript/build.sh
+
+    artifacts:
+        paths:
+            - build/build.zip
+            - build/
+        expire_in: 1 week
