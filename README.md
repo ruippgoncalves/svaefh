@@ -56,7 +56,7 @@ Intruções:
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
     <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
-    <li>Execute num terminal linux ./build/buildScripts/build.sh</li>
+    <li>Execute num terminal linux sudo ./build/buildScripts/build.sh</li>
     <li>Envie o ficheiro build/build.zip para produção</li>
 </ol>
 

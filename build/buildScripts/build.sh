@@ -13,11 +13,11 @@ fi
 
 # Delete Previous build files
 if test -d "build/client/web"; then
-    sudo rm -R build/client/web
+    rm -R build/client/web
 fi
 
 if test -f "build/server/server"; then
-    sudo rm build/server/server
+    rm build/server/server
 fi
 
 if test -d "build/client/docker/"; then
@@ -34,8 +34,8 @@ fi
 
 # Build
 mkdir build/client/web
-DOCKER_BUILDKIT=1 sudo docker build -o ./build/client/web -f ./build/buildScripts/Dockerfile.client ./client
-DOCKER_BUILDKIT=1 sudo docker build -o ./build/server -f ./build/buildScripts/Dockerfile.server ./server
+DOCKER_BUILDKIT=1 docker build -o ./build/client/web -f ./build/buildScripts/Dockerfile.client ./client
+DOCKER_BUILDKIT=1 docker build -o ./build/server -f ./build/buildScripts/Dockerfile.server ./server
 
 cp -r ./client/docker ./build/client
 rm -R ./build/client/docker/email
