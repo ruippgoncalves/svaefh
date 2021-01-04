@@ -27,7 +27,7 @@ export default function WithGoogle(props) {
 
         try {
             data = await AuthSession.startAsync({
-                authUrl: `${Constants.manifest.extra.API}/auth/google`,
+                authUrl: `${Constants.manifest.extra.API}/auth/google${Platform.OS == 'web' ? '' : '?mobile'}`,
                 returnUrl: AuthSession.makeRedirectUri()
             })
         } catch {

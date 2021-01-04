@@ -15,24 +15,28 @@ async function genToken(user) {
 }
 
 // Auth with Google
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], passReqToCallback: true }));
 
 // Google Auth Callback
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: `${process.env.BACKEND}/auth/error` }), async (req, res) => {
-    if (/Android|iPhone|iPad/i.test(req.headers["user-agent"])) {
-        res.redirect(`${process.env.MOBILE}?user=` + await genToken(req.user));
-    } else {
-        res.redirect(`${process.env.FRONTEND}?user=` + await genToken(req.user));
-    }
-});
+router.get('/google/callback', (req, res) => {
+    passport.authenticate('google', async (err, user) => {
+        console.log(user)
+        if (err) {
+            if (req.params.mobile) {
+                res.redirect(`${process.env.MOBILE}?error`);
+            } else {
+                res.redirect(`${process.env.FRONTEND}?error`);
+            }
 
-// Google Error
-router.get('/error', (req, res) => {
-    if (/Android|iPhone|iPad/i.test(req.headers["user-agent"])) {
-        res.redirect(`${process.env.MOBILE}?error`);
-    } else {
-        res.redirect(`${process.env.FRONTEND}?error`);
-    }
+            return;
+        }
+
+        if (req.params.mobile) {
+            res.redirect(`${process.env.MOBILE}?user=` + await genToken(user));
+        } else {
+            res.redirect(`${process.env.FRONTEND}?user=` + await genToken(user));
+        }
+    })(req, res);
 });
 
 // Google Logout
