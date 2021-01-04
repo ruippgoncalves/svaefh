@@ -10,3 +10,4 @@ Arrependimentos quanto à PAP
 - A não criação de testes automatizados
 - A não utilização de propstypes ou o uso de TypeScript
 - A não integração com o eslint e o prettier
+- Utilização do Axios ao invés da fetch API
