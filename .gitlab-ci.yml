@@ -31,16 +31,5 @@ build:
   artifacts:
       paths:
           - build/build.zip
+          - client/app.json
       expire_in: 1 week
-
-mobile:
-  image: node:14
-
-  script:
-    - echo "{\"expo\":{\"scheme\":\"svaefh\",\"name\":\"Sistema de Vota\u00E7\u00E3o AEFH\",\"slug\":\"svaefh\",\"version\":\"1.0.0\",\"orientation\":\"portrait\",\"icon\":\".\/assets\/icon.png\",\"githubUrl\":\"https:\/\/github.com\/ruippgoncalves\/svaefh\",\"privacy\":\"hidden\",\"splash\":{\"image\":\".\/assets\/splash.png\",\"resizeMode\":\"contain\",\"backgroundColor\":\"#05738C\"},\"platforms\":[\"ios\",\"android\",\"web\"],\"updates\":{\"fallbackToCacheTimeout\":0},\"assetBundlePatterns\":[\"**\/*\"],\"ios\":{\"supportsTablet\":true,\"bundleIdentifier\":\"pt.aefh.svaefh\"},\"android\":{\"package\":\"pt.aefh.svaefh\"},\"web\":{\"favicon\":\".\/assets\/favicon.png\",\"lang\":\"pt\",\"description\":\"Sistema de Vota\u00E7\u00E3o AEFH\"},\"extra\":{\"API\":\"$BACKEND\"}}}" > client/app.json
-    - cd client
-    - npm i
-    - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-    - npx expo publish --non-interactive
-    - yes | npx expo build:android --release-channel staging --no-publish --no-wait --non-interactive
-    - yes | npx expo build:ios --release-channel staging --no-publish --no-wait --non-interactive
