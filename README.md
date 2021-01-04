@@ -10,6 +10,7 @@
 | [**Objetivos**](#objetivos)
 | [**Funcionalidades**](#funcionalidades)
 | [**Como Utilizar**](#como-utilizar)
+| [**Variáveis para Gitlab CI/CD**](#variáveis-para-o-gitlab-cicd)
 | [**Tecnologias Utilizadas**](#tecnologias-utilizadas)
 
 ## O que é o Sistema de Votação AEFH
@@ -67,9 +68,7 @@ Em Adição, para Android e IOS, São Necessários:
 
 Mais Informações de como Criar as Aplicações em https://docs.expo.io/workflow/publishing/
 
-##
-
-Variáveis para o Gitlab CI/CD:
+## Variáveis para o Gitlab CI/CD:
 - GOOGLE_CLIENT_ID
 - GOOGLE_CLIENT_SECRET
 - EMAIL
@@ -80,6 +79,8 @@ Variáveis para o Gitlab CI/CD:
 - MOBILE
 - BACKEND
 - TOKEN
+- EXPO_USERNAME
+- EXPO_PASSWORD
 
 Ver server/config/config.example.env para mais detalhes
 

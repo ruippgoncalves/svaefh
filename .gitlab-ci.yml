@@ -1,34 +1,44 @@
 build:
-    image: docker:20.10.1-dind
+  image: docker:20.10.1-dind
 
-    variables:
-        DOCKER_DRIVER: overlay2
-        DOCKER_TLS_CERTDIR: ""
-        DOCKER_HOST: tcp://docker:2375
+  variables:
+      DOCKER_DRIVER: overlay2
+      DOCKER_TLS_CERTDIR: ""
+      DOCKER_HOST: tcp://docker:2375
 
-    services:
-        - docker:20.10.1-dind
+  services:
+      - docker:20.10.1-dind
 
-    script:
-        - apk --no-cache add zip
+  script:
+      - apk --no-cache add zip
 
-        - echo "MONGO_URI = mongodb://mongodb:27017/sistemaVotacaoAEFH" > server/config/config.env
-        - echo "GOOGLE_CLIENT_ID = $GOOGLE_CLIENT_ID" >> server/config/config.env
-        - echo "GOOGLE_CLIENT_SECRET = $GOOGLE_CLIENT_SECRET" >> server/config/config.env
-        - echo "EMAIL = $EMAIL" >> server/config/config.env
-        - echo "PASSWORD = $PASSWORD" >> server/config/config.env
-        - echo "STUDENTS_EMAIL = $STUDENTS_EMAIL" >> server/config/config.env
-        - echo "TEACHERS_EMAIL = $TEACHERS_EMAIL" >> server/config/config.env
-        - echo "FRONTEND = $FRONTEND" >> server/config/config.env
-        - echo "MOBILE = $MOBILE" >> server/config/config.env
-        - echo "BACKEND = $BACKEND" >> server/config/config.env
-        - echo "TOKEN = $TOKEN" >> server/config/config.env
+      - echo "MONGO_URI = mongodb://mongodb:27017/sistemaVotacaoAEFH" > server/config/config.env
+      - echo "GOOGLE_CLIENT_ID = $GOOGLE_CLIENT_ID" >> server/config/config.env
+      - echo "GOOGLE_CLIENT_SECRET = $GOOGLE_CLIENT_SECRET" >> server/config/config.env
+      - echo "EMAIL = $EMAIL" >> server/config/config.env
+      - echo "PASSWORD = $PASSWORD" >> server/config/config.env
+      - echo "STUDENTS_EMAIL = $STUDENTS_EMAIL" >> server/config/config.env
+      - echo "TEACHERS_EMAIL = $TEACHERS_EMAIL" >> server/config/config.env
+      - echo "FRONTEND = $FRONTEND" >> server/config/config.env
+      - echo "MOBILE = $MOBILE" >> server/config/config.env
+      - echo "BACKEND = $BACKEND" >> server/config/config.env
+      - echo "TOKEN = $TOKEN" >> server/config/config.env
 
-        - echo "{\"expo\":{\"scheme\":\"svaefh\",\"name\":\"Sistema de Vota\u00E7\u00E3o AEFH\",\"slug\":\"svaefh\",\"version\":\"1.0.0\",\"orientation\":\"portrait\",\"icon\":\".\/assets\/icon.png\",\"githubUrl\":\"https:\/\/github.com\/ruippgoncalves\/svaefh\",\"privacy\":\"hidden\",\"splash\":{\"image\":\".\/assets\/splash.png\",\"resizeMode\":\"contain\",\"backgroundColor\":\"#05738C\"},\"platforms\":[\"ios\",\"android\",\"web\"],\"updates\":{\"fallbackToCacheTimeout\":0},\"assetBundlePatterns\":[\"**\/*\"],\"ios\":{\"supportsTablet\":true,\"bundleIdentifier\":\"pt.aefh.svaefh\"},\"android\":{\"package\":\"pt.aefh.svaefh\"},\"web\":{\"favicon\":\".\/assets\/favicon.png\",\"lang\":\"pt\",\"description\":\"Sistema de Vota\u00E7\u00E3o AEFH\"},\"extra\":{\"API\":\"$BACKEND\"}}}" > client/app.json
+      - echo "{\"expo\":{\"scheme\":\"svaefh\",\"name\":\"Sistema de Vota\u00E7\u00E3o AEFH\",\"slug\":\"svaefh\",\"version\":\"1.0.0\",\"orientation\":\"portrait\",\"icon\":\".\/assets\/icon.png\",\"githubUrl\":\"https:\/\/github.com\/ruippgoncalves\/svaefh\",\"privacy\":\"hidden\",\"splash\":{\"image\":\".\/assets\/splash.png\",\"resizeMode\":\"contain\",\"backgroundColor\":\"#05738C\"},\"platforms\":[\"ios\",\"android\",\"web\"],\"updates\":{\"fallbackToCacheTimeout\":0},\"assetBundlePatterns\":[\"**\/*\"],\"ios\":{\"supportsTablet\":true,\"bundleIdentifier\":\"pt.aefh.svaefh\"},\"android\":{\"package\":\"pt.aefh.svaefh\"},\"web\":{\"favicon\":\".\/assets\/favicon.png\",\"lang\":\"pt\",\"description\":\"Sistema de Vota\u00E7\u00E3o AEFH\"},\"extra\":{\"API\":\"$BACKEND\"}}}" > client/app.json
 
-        - ./build/buildScripts/build.sh
+      - ./build/buildScripts/build.sh
 
-    artifacts:
-        paths:
-            - build/build.zip
-        expire_in: 1 week
+  artifacts:
+      paths:
+          - build/build.zip
+      expire_in: 1 week
+
+mobile:
+  image: node:14
+
+  scripts:
+    - echo "{\"expo\":{\"scheme\":\"svaefh\",\"name\":\"Sistema de Vota\u00E7\u00E3o AEFH\",\"slug\":\"svaefh\",\"version\":\"1.0.0\",\"orientation\":\"portrait\",\"icon\":\".\/assets\/icon.png\",\"githubUrl\":\"https:\/\/github.com\/ruippgoncalves\/svaefh\",\"privacy\":\"hidden\",\"splash\":{\"image\":\".\/assets\/splash.png\",\"resizeMode\":\"contain\",\"backgroundColor\":\"#05738C\"},\"platforms\":[\"ios\",\"android\",\"web\"],\"updates\":{\"fallbackToCacheTimeout\":0},\"assetBundlePatterns\":[\"**\/*\"],\"ios\":{\"supportsTablet\":true,\"bundleIdentifier\":\"pt.aefh.svaefh\"},\"android\":{\"package\":\"pt.aefh.svaefh\"},\"web\":{\"favicon\":\".\/assets\/favicon.png\",\"lang\":\"pt\",\"description\":\"Sistema de Vota\u00E7\u00E3o AEFH\"},\"extra\":{\"API\":\"$BACKEND\"}}}" > client/app.json
+    - npm i -g expo-cli@3.28.5
+    - npm install -g sharp-cli@1.14.1 --unsafe-perm
+    - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - expo publish --non-interactive
