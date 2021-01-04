@@ -42,5 +42,5 @@ mobile:
     - npm i
     - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - npx expo publish --non-interactive
-    - npx expo build:android
-    - npx expo build:ios
+    - yes | npx expo build:android --release-channel staging --no-publish --no-wait --non-interactive
+    - yes | npx expo build:ios --release-channel staging --no-publish --no-wait --non-interactive
