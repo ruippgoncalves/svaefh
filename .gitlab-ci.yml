@@ -43,3 +43,5 @@ mobile:
     - cd client
     - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - expo publish --non-interactive
+  artifacts:
+      - /root/.npm/
