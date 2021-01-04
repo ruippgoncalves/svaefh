@@ -158,7 +158,7 @@ export default function Gestao({ route, navigation }) {
                             {votacao.name}
                         </Text>
                     ) : (
-                            <TextInput autoFocus={true} numberOfLines={1} style={{ fontSize: 30, width: 'auto' }} value={votacao.name} placeholder="Nome da Votação" onChangeText={text => setVotacao({ ...votacao, name: text })} maxLength="50" />
+                            <TextInput autoFocus={true} numberOfLines={1} style={{ fontSize: 30, width: 'auto', maxWidth: '90%' }} value={votacao.name} placeholder="Nome da Votação" onChangeText={text => setVotacao({ ...votacao, name: text })} maxLength="50" />
                         )}
                     {!votacao.running && (
                         <TouchableOpacity onPress={() => setEditName(!editName)} >
