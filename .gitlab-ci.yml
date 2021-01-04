@@ -39,7 +39,6 @@ mobile:
   script:
     - echo "{\"expo\":{\"scheme\":\"svaefh\",\"name\":\"Sistema de Vota\u00E7\u00E3o AEFH\",\"slug\":\"svaefh\",\"version\":\"1.0.0\",\"orientation\":\"portrait\",\"icon\":\".\/assets\/icon.png\",\"githubUrl\":\"https:\/\/github.com\/ruippgoncalves\/svaefh\",\"privacy\":\"hidden\",\"splash\":{\"image\":\".\/assets\/splash.png\",\"resizeMode\":\"contain\",\"backgroundColor\":\"#05738C\"},\"platforms\":[\"ios\",\"android\",\"web\"],\"updates\":{\"fallbackToCacheTimeout\":0},\"assetBundlePatterns\":[\"**\/*\"],\"ios\":{\"supportsTablet\":true,\"bundleIdentifier\":\"pt.aefh.svaefh\"},\"android\":{\"package\":\"pt.aefh.svaefh\"},\"web\":{\"favicon\":\".\/assets\/favicon.png\",\"lang\":\"pt\",\"description\":\"Sistema de Vota\u00E7\u00E3o AEFH\"},\"extra\":{\"API\":\"$BACKEND\"}}}" > client/app.json
     - npm i -g expo-cli@3.28.5
-    - npm install -g sharp-cli@1.14.1 --unsafe-perm
     - cd client
     - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - expo publish --non-interactive
