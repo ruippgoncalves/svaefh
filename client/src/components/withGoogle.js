@@ -23,12 +23,13 @@ export default function WithGoogle(props) {
 
     // Handles login
     async function login() {
+        console.log(`${Constants.manifest.extra.API}/auth/google${Platform.OS == 'web' ? '' : '?mobile'}`)
         let data;
 
         try {
             data = await AuthSession.startAsync({
-                authUrl: `${Constants.manifest.extra.API}/auth/google${Platform.OS == 'web' ? '' : '?mobile'}`,
-                returnUrl: AuthSession.makeRedirectUri()
+                authUrl: `${Constants.manifest.extra.API}/auth/google?mobile=${Platform.OS != 'web'}`,
+                returnUrl: AuthSession.makeRedirectUri({ path: 'redirect' })
             })
         } catch {
             return erro('Não foi possivel iniciar sessão, se estiver a utilizar telemóvel ou tablet descarregue a aplicação.');

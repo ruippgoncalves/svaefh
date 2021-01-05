@@ -15,26 +15,27 @@ async function genToken(user) {
 }
 
 // Auth with Google
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], passReqToCallback: true }));
+router.get('/google', (req, res, next) => {
+    passport.authenticate('google', { scope: ['profile', 'email'], state: req.query.mobile })(req, res, next);
+});
 
 // Google Auth Callback
 router.get('/google/callback', (req, res) => {
     passport.authenticate('google', async (err, user) => {
-        console.log(user)
         if (err) {
-            if (req.params.mobile) {
+            if (req.query.state) {
                 res.redirect(`${process.env.MOBILE}?error`);
             } else {
-                res.redirect(`${process.env.FRONTEND}?error`);
+                res.redirect(`${process.env.FRONTEND}/redirect?error`);
             }
 
             return;
         }
 
-        if (req.params.mobile) {
+        if (req.query.state) {
             res.redirect(`${process.env.MOBILE}?user=` + await genToken(user));
         } else {
-            res.redirect(`${process.env.FRONTEND}?user=` + await genToken(user));
+            res.redirect(`${process.env.FRONTEND}/redirect?user=` + await genToken(user));
         }
     })(req, res);
 });
