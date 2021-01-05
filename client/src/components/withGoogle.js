@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text, Alert, Platform } from 'react-native';
-import decode from './jwt';
+import decode from 'jwt-decode';
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-community/async-storage';
 import Axios from 'axios';

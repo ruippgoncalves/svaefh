@@ -111,7 +111,7 @@ export default function LogIn({ navigation }) {
             <Image style={styles.icon} source={require('../assets/icon.png')} />
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'} style={styles.size}>
                 <Text style={styles.text}>Sistema de Votação AEFH</Text>
-                <WithGoogle loginData={data => alert('ola')} />
+                <WithGoogle loginData={data => setLoginData(data)} />
                 <TextInput value={codVotacao} style={styles.input} autoFocus={true} autoCapitalize="characters" placeholder="Código da Votação" onChangeText={code => setCodVotacao(code.toUpperCase())} maxLength={4} />
                 {Platform.OS != 'web' && <View style={styles.qr}><Button title={"Ler Código QR"} onPress={handleBarcode} /></View>}
                 <Button disabled={!(criarVotacao || cdVotacao)} title={criarVotacao && !cdVotacao ? "Gerir Votações" : "Votar"} onPress={criarVotacao && !cdVotacao ? () => navigation.navigate('Gerir Votações') : votar} />
