@@ -23,7 +23,7 @@ router.get('/google', (req, res, next) => {
 router.get('/google/callback', (req, res) => {
     passport.authenticate('google', async (err, user) => {
         if (err) {
-            if (req.query.state) {
+            if (req.query.state == 'true') {
                 res.redirect(`${process.env.MOBILE}?error`);
             } else {
                 res.redirect(`${process.env.FRONTEND}/redirect?error`);
@@ -32,7 +32,7 @@ router.get('/google/callback', (req, res) => {
             return;
         }
 
-        if (req.query.state) {
+        if (req.query.state == 'true') {
             res.redirect(`${process.env.MOBILE}?user=` + await genToken(user));
         } else {
             res.redirect(`${process.env.FRONTEND}/redirect?user=` + await genToken(user));
