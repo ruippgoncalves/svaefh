@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Platform, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -7,9 +7,9 @@ const LogIn = React.lazy(() => import('./src/login'));
 const Votar = React.lazy(() => import('./src/votar'));
 const Agradecimentos = React.lazy(() => import('./src/agradecimentos'));
 
-const Gestao = React.lazy(() => import('./src/web/gestao'));
-const Editar = React.lazy(() => import('./src/web/editar'));
-const Dados = React.lazy(() => import('./src/web/dados'));
+const Gestao = React.lazy(() => import('./src/gestao'));
+const Editar = React.lazy(() => import('./src/editar'));
+const Dados = React.lazy(() => import('./src/dados'));
 
 const Stack = createStackNavigator();
 
@@ -32,13 +32,9 @@ export default function App() {
                     <Stack.Screen name="Iniciar Sessão" component={LogIn} />
                     <Stack.Screen name="Votar" component={Votar} />
                     <Stack.Screen name="Agradecimentos" component={Agradecimentos} />
-                    {Platform.OS == 'web' && (
-                        <>
-                            <Stack.Screen name="Gerir Votações" component={Gestao} />
-                            <Stack.Screen name="Editar Votação" component={Editar} />
-                            <Stack.Screen name="Dados da Votação" component={Dados} />
-                        </>
-                    )}
+                    <Stack.Screen name="Gerir Votações" component={Gestao} />
+                    <Stack.Screen name="Editar Votação" component={Editar} />
+                    <Stack.Screen name="Dados da Votação" component={Dados} />
                 </Stack.Navigator>
             </NavigationContainer>
 

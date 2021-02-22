@@ -12,7 +12,7 @@ export default function LogIn({ navigation }) {
     const [loginData, setLoginData] = React.useState([false, false]);
     const [dimStyle, setDymStyle] = React.useState(onChange({ window: Dimensions.get('window') }));
     const [codVotacao, setCodVotacao] = React.useState("");
-    const criarVotacao = Platform.OS == 'web' && loginData[1];
+    const criarVotacao = loginData[1];
     const cdVotacao = codVotacao.length == 4;
 
     // To render Image Properly
@@ -109,13 +109,15 @@ export default function LogIn({ navigation }) {
         <ImageBackground source={require('../assets/ui/escola.png')} style={styles.container} imageStyle={dimStyle}>
             <BarCode />
             <Image style={styles.icon} source={require('../assets/icon.png')} />
-            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'} style={styles.size}>
+            <View style={styles.size}>
                 <Text style={styles.text}>Sistema de Votação AEFH</Text>
                 <WithGoogle loginData={data => setLoginData(data)} />
-                <TextInput value={codVotacao} style={styles.input} autoFocus={true} autoCapitalize="characters" placeholder="Código da Votação" onChangeText={code => setCodVotacao(code.toUpperCase())} maxLength={4} />
+                <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+                    <TextInput value={codVotacao} style={styles.input} autoFocus={true} autoCapitalize="characters" placeholder="Código da Votação" onChangeText={code => setCodVotacao(code.toUpperCase())} maxLength={4} />
+                </KeyboardAvoidingView>
                 {Platform.OS != 'web' && <View style={styles.qr}><Button title={"Ler Código QR"} onPress={handleBarcode} /></View>}
                 <Button disabled={!(criarVotacao || cdVotacao)} title={criarVotacao && !cdVotacao ? "Gerir Votações" : "Votar"} onPress={criarVotacao && !cdVotacao ? () => navigation.navigate('Gerir Votações') : votar} />
-            </KeyboardAvoidingView>
+            </View>
             <Text style={styles.fotografia}>Fotografia da Autoria de Ricardo Fernandes</Text>
         </ImageBackground>
     );
