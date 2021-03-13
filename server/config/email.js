@@ -9,11 +9,12 @@ const transporter = nodemailer.createTransport({
 });
 
 function sendMail(sendTo, code) {
-    transporter.sendMail({
-        from: process.env.EMAIL,
-        bcc: sendTo,
-        subject: 'Sistema de Votação AEFH',
-        html: `
+    transporter.sendMail(
+        {
+            from: process.env.EMAIL,
+            bcc: sendTo,
+            subject: 'Sistema de Votação AEFH',
+            html: `
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -252,7 +253,7 @@ function sendMail(sendTo, code) {
                                                                                 <td>
                                                                                     <img alt="" class="img-max"
                                                                                         style="display: block; padding: 0; color: #3F3D33; text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-size: 16px; width: 500px;"
-                                                                                        src="${process.env.FRONTEND + '/static/email/badge.png'}"
+                                                                                        src="${`${process.env.FRONTEND}/static/email/badge.png`}"
                                                                                         width="500" border="0">
                                                                                 </td>
                                                                             </tr>
@@ -333,14 +334,14 @@ function sendMail(sendTo, code) {
                                     align="center">
                                     <a target="_new"
                                         href="https://pt-pt.facebook.com/AgrupamentoDeEscolasFranciscoDeHolanda"><img
-                                            src="${process.env.FRONTEND + '/static/email/facebook.png'}"
+                                            src="${`${process.env.FRONTEND}/static/email/facebook.png`}"
                                             alt="Seguir no facebook" style="padding: 0 5px 0px 0px;" width="48"
                                             height="48"></a>
 
 
 
                                     <a target="_new" href="https://www.instagram.com/aefranciscoholanda/"><img
-                                            src="${process.env.FRONTEND + '/static/email/instagram.png'}"
+                                            src="${`${process.env.FRONTEND}/static/email/instagram.png`}"
                                             alt="Seguir no instagram" style="padding: 0 0px 0px 5px;" width="48"
                                             height="48"></a></td>
                             </tr>
@@ -394,7 +395,11 @@ function sendMail(sendTo, code) {
 
 </html>
         `
-    }, err => { if (err) console.log(err); });
+        },
+        (err) => {
+            if (err) console.log(err);
+        }
+    );
 }
 
 module.exports = sendMail;

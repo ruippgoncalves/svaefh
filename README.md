@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="AEFH Logo" src="client/assets/LogoAEFH_Original.png" width="250" style="border-radius: 15px">
+    <img alt="AEFH Logo" src="client/assets/icon.svg" width="250" style="border-radius: 15px">
 </div>
 <br />
 
@@ -10,7 +10,6 @@
 | [**Objetivos**](#objetivos)
 | [**Funcionalidades**](#funcionalidades)
 | [**Como Utilizar**](#como-utilizar)
-| [**Variáveis para Gitlab CI/CD**](#variáveis-para-o-gitlab-cicd)
 | [**Tecnologias Utilizadas**](#tecnologias-utilizadas)
 
 ## O que é o Sistema de Votação AEFH
@@ -37,6 +36,7 @@ As principais funcionalidades:
 - Diferentes Métodos de Votação:
   - Escolha Múltipla (Plurality Voting)
   - Escolha Classificada (Instant-Runoff Voting)
+  - Método Condorcet
 - Utilização na Comunidade Escolar (Alunos e Professores) com Prevenção de Multiplos Votos e Utilização Externa sem Prevenção de Multiplos Votos
 - Restrição de Eleitores (Interno)
 - QRCode para a Eleição
@@ -48,7 +48,7 @@ As principais funcionalidades:
 São Necessários:
 
 - Docker e Docker Compose [(Opcionalmente Docker Registry e Docker Swarm Mode)](https://docs.docker.com/engine/swarm/stack-deploy/)
-- Chaves da Google OAuth2 API
+- Chaves da Google OAuth2 API (Web Android e IOS)
 - Email No-Reply (SMTP e Less Secure Apps ativas para essa conta de email)
 - Dominios dos Emails de Professores e Alunos Distintos (ou sub-dominios Ex: email@alunos.aefh.pt; email@aefh.pt)
 
@@ -56,52 +56,34 @@ Intruções:
 
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
-    <li>Editar em client/app.json (copie de client/app.example.json) a chave expo.extra.API para https://website/api/v1 (linha 40)</li>
+    <li>Editar client/index.html (copie de client/template) e adicione a sua chave OAuth da Google (linha 20)</li>
+    <li>Copie e edite o ficheiro client/lib/config.dart (client/template/config.dart)</li>
     <li>Execute num terminal linux sudo ./build/buildScripts/build.sh</li>
     <li>Envie o ficheiro build/build.zip para produção</li>
 </ol>
 
 Em Adição, para Android e IOS, São Necessários:
 
-- Node.JS (v14 LTS)
-- Expo CLI + Conta Expo (com sessão iniciada, comando: expo login)
+- macOS + XCode (testado com macOS 11.x.x xxx e XCode x.x.x)
 
-Mais Informações de como Criar as Aplicações em https://docs.expo.io/workflow/publishing/
+Instruções:
 
-## Variáveis para o Gitlab CI/CD:
-- GOOGLE_CLIENT_ID
-- GOOGLE_CLIENT_SECRET
-- EMAIL
-- PASSWORD
-- STUDENTS_EMAIL
-- TEACHERS_EMAIL
-- FRONTEND
-- MOBILE
-- BACKEND
-- TOKEN
-- EXPO_USERNAME
-- EXPO_PASSWORD
-
-Ver server/config/config.example.env para mais detalhes
 
 ## Tecnologias Utilizadas
 
 As principais tecnologias:
 
 FrontEnd:
-- Expo (React Native)
+- Flutter
 
 BackEnd:
 - Express.JS
-- Passport.JS
-- Json Web Token
 - Mongoose
 - Webpack
 
 Adicionalmente:
 - MongoDB
 - Docker
-- Nginx
 - Mosaico
+- NginX
 - DigitalOcean NGINXConfig Tool
-- Gitlab CI/CD

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const OptionSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    votacao: { type: mongoose.Types.ObjectId, required: true, ref: 'Votacao' }
+    name: { type: String, required: true },
+    poll: { type: mongoose.Types.ObjectId, required: true, ref: 'poll' }
 });
 
-module.exports = mongoose.model('Option', OptionSchema);
+module.exports = mongoose.model('option', OptionSchema);

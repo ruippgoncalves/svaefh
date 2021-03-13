@@ -1,61 +1,72 @@
-const jwt = require('jsonwebtoken');
-const Token = require('../models/Token');
+const { OAuth2Client } = require('google-auth-library');
 
-async function validarDB(token) {
-    try {
-        let dat = await Token.findOne({ token: token });
+const clientId = [
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_ID_ANDROID,
+    process.env.GOOGLE_CLIENT_ID_IOS
+];
 
-        return !Boolean(dat);
-    } catch (err) {
-        console.log(err);
-        return true;
+const client = new OAuth2Client(clientId);
+
+async function verify(token) {
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: clientId
+    });
+
+    const payload = ticket.getPayload();
+    const userId = payload.sub;
+    const { email } = payload;
+
+    return { userId, email };
+}
+
+function requireAuthCreate(req, res, next) {
+    const auth = req.headers.authorization;
+    const token = auth && auth.split(' ')[1];
+
+    if (token == null) {
+        res.sendStatus(403);
+    } else {
+        verify(token)
+            .then((user) => {
+                if (user.email.split('@')[1] !== process.env.TEACHERS_EMAIL) {
+                    res.sendStatus(403);
+                } else {
+                    req.user = user;
+                    next();
+                }
+            })
+            .catch(() => res.sendStatus(403));
     }
 }
 
-function requireAuth(req, res, next) {
-    const auth = req.headers['authorization'];
-    const token = auth && auth.split(' ')[1];
-
-    if (token == null) res.sendStatus(403);
-
-    jwt.verify(token, process.env.TOKEN, async (err, user) => {
-        if (err || await validarDB(token)) return res.sendStatus(403);
-
-        req.user = user.user;
-        next();
-    });
-}
-
-function requireAuthCriar(req, res, next) {
-    const auth = req.headers['authorization'];
-    const token = auth && auth.split(' ')[1];
-
-    if (token == null) return res.sendStatus(403);
-
-    jwt.verify(token, process.env.TOKEN, async (err, user) => {
-        if (err || !user.user.criarVotacao || await validarDB(token)) return res.sendStatus(403);
-
-        req.user = user.user;
-        next();
-    });
-}
-
 function authAvaiable(req, res, next) {
-    const auth = req.headers['authorization'];
+    const auth = req.headers.authorization;
     const token = auth && auth.split(' ')[1];
 
-    if (token == null) return next();
-
-    jwt.verify(token, process.env.TOKEN, async (err, user) => {
-        if (err || await validarDB(token)) return res.sendStatus(403);
-
-        req.user = user.user;
+    if (token === '') {
         next();
-    });
+    } else {
+        verify(token)
+            .then((user) => {
+                const domain = user.email.split('@')[1];
+
+                if (
+                    domain !== process.env.STUDENTS_EMAIL &&
+                    domain !== process.env.TEACHERS_EMAIL
+                ) {
+                    res.sendStatus(403);
+                } else {
+                    req.user = user;
+                    next();
+                }
+            })
+            .catch(() => res.sendStatus(403));
+    }
 }
 
 module.exports = {
-    requireAuth,
-    requireAuthCriar,
+    requireAuthCreate,
     authAvaiable
 };

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Connect to mongoDB
 async function connectDB() {
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI, {
+        await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
@@ -12,7 +12,7 @@ async function connectDB() {
             keepAliveInitialDelay: 300000
         });
 
-        console.log('Ligação à base de dados estabelecida com sucesso')
+        console.log('Ligação à base de dados estabelecida com sucesso!');
     } catch (err) {
         console.error(err);
         process.exit(1);
