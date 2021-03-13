@@ -64,10 +64,12 @@ Intruções:
 
 Em Adição, para Android e IOS, São Necessários:
 
+- Android Studio (testado com 4.1.2)
 - macOS + XCode (testado com macOS 11.x.x xxx e XCode x.x.x)
 
 Instruções:
 
+- Configure o client/android/key.properties (https://flutter.dev/docs/deployment/android)
 
 ## Tecnologias Utilizadas
 
