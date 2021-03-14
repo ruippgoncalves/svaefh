@@ -1,9 +1,14 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../config.dart';
 
-// TODO qrcode and unilink
+import './qrReader.dart';
+
 class VoteUI extends StatefulWidget {
   final logged;
   final String? token;
@@ -15,14 +20,49 @@ class VoteUI extends StatefulWidget {
 }
 
 class _VoteUIState extends State<VoteUI> {
+  final _regExVer = new RegExp('[a-fA-f0-9]{4}');
+
   var loading = false;
   var code = '';
+  var extCode = false;
+
+  @override
+  initState() {
+    super.initState();
+
+    if (!kIsWeb) {
+      initUniLinks().then((value) => null);
+    }
+  }
+
+  Future<String?> initUniLinks() async {
+    try {
+      String link = await getInitialLink();
+
+      readCodeFromString(link);
+    } on PlatformException {
+      return null;
+    }
+  }
+
+  void readCodeFromString(String link) {
+    List<String> cd = link.split('=');
+
+    if (cd.length == 2 && cd[1].contains(_regExVer)) {
+      setState(() {
+        code = cd[1];
+        extCode = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
+        TextFormField(
+          key: Key(extCode ? 'code' : 'extCode'),
+          initialValue: code,
           decoration: InputDecoration(
             labelText: 'Código da Votação',
           ),
@@ -31,6 +71,28 @@ class _VoteUIState extends State<VoteUI> {
           onChanged: (text) => setState(() => {code = text}),
           enabled: !loading,
         ),
+        if (!kIsWeb)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              child: Text('Ler Código QR'),
+              onPressed: () async {
+                setState(() {
+                  code = '';
+                  extCode = false;
+                });
+
+                final result = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => QRReader()));
+
+                if (result != null)
+                  setState(() {
+                    code = result;
+                    extCode = true;
+                  });
+              },
+            ),
+          ),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
@@ -57,7 +119,7 @@ class _VoteUIState extends State<VoteUI> {
               }
 
               // Vote
-              if (!code.contains(new RegExp('[a-fA-f0-9]{4}'))) {
+              if (!code.contains(_regExVer)) {
                 showDialog(
                   context: context,
                   builder: (_) => AlertDialog(

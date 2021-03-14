@@ -47,6 +47,9 @@ app.*.map.json
 
 # Templates
 web/index.html
-ios/Runner/GoogleService-Info.plist
-android/app/google-services.json
 lib/config.dart
+
+# Android
+android/app/key.jks
+android/app/google-services.json
+android/settings_aar.gradle

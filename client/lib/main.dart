@@ -31,7 +31,6 @@ class SVAEFH extends StatelessWidget {
         '/management/settings': (context) => Settings(),
       },
       initialRoute: '/',
-      debugShowCheckedModeBanner: false,
     );
   }
 }

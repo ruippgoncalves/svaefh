@@ -276,7 +276,7 @@ class _DataState extends State<Data> {
               ? Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    margin: EdgeInsets.only(top: 15),
+                    margin: EdgeInsets.all(15),
                     child: Text(
                       'Inicie a votação para a acompanhar em tempo real! (Necessita de pelo menos uma opção para iniciar)',
                       textAlign: TextAlign.center,

@@ -143,7 +143,11 @@ class _SettingsState extends State<Settings> {
                       'id': id,
                       'name': name,
                     },
-                  );
+                  ).catchError(() {
+                    setState(() {
+                      updating = false;
+                    });
+                  });
                 }
               });
             },
@@ -215,11 +219,7 @@ class _SettingsState extends State<Settings> {
                             const url =
                                 'https://www.youtube-nocookie.com/embed/PaxVCsnox_4?end=307&vq=hd1080&modestbranding=1&cc_load_policy=1&hl=pt-PT';
 
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'Could not launch $url';
-                            }
+                            await launch(url);
                           },
                           splashRadius: 1,
                         ),
@@ -312,7 +312,7 @@ class _SettingsState extends State<Settings> {
                           (opt) => Row(
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width - 60,
+                                width: MediaQuery.of(context).size.width - 68,
                                 child: TextFormField(
                                   key: Key('${options.length}${opt.key}'),
                                   maxLength: 30,

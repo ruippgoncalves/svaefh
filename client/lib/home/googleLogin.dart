@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../config.dart';
 
-// TODO Ios/Android Integration
+// TODO Ios Integration
 
 // Scopes
 GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: <String>[
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile'
-  ],
+  scopes: <String>['email', 'profile'],
 );
 
 class GoogleSignInButton extends StatefulWidget {
@@ -35,15 +32,12 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
 
     http
         .get(Uri.parse('$apiUrl/api/v1'))
-        .then(
-            (value) => {
-                  if (value.statusCode == 200)
-                    emails =
-                        _EmailsData.fromJson(jsonDecode(value.body)).emails()
-                  else
-                    throw Exception('Failed to load emails')
-                },
-            onError: (error) => print(error))
+        .then((value) => {
+              if (value.statusCode == 200)
+                emails = _EmailsData.fromJson(jsonDecode(value.body)).emails()
+              else
+                throw Exception('Failed to load emails')
+            })
         .then((dt) {
       _googleSignIn.onCurrentUserChanged
           .listen((GoogleSignInAccount? account) async {

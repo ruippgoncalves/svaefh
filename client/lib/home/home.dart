@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import './googleLogin.dart';
 import './voteUI.dart';
@@ -21,16 +22,19 @@ class _HomeState extends State<Home> {
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
-            constraints: BoxConstraints(minHeight: 450),
+            constraints: BoxConstraints(minHeight: 550),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/school.jpg"),
+                image:
+                    MediaQuery.of(context).orientation == Orientation.landscape
+                        ? AssetImage("assets/school.jpg")
+                        : AssetImage("assets/school2.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
             child: Center(
               child: Container(
-                height: 405,
+                height: kIsWeb ? 405 : 498,
                 child: Stack(
                   children: [
                     Column(
@@ -55,7 +59,7 @@ class _HomeState extends State<Home> {
                                   Container(
                                     margin: EdgeInsets.only(bottom: 10),
                                     child: Text(
-                                      'Sistema de Votção AEFH',
+                                      'Sistema de Votação AEFH',
                                       textAlign: TextAlign.center,
                                       style:
                                           Theme.of(context).textTheme.headline4,
@@ -73,11 +77,7 @@ class _HomeState extends State<Home> {
                                         const url =
                                             'https://github.com/ruippgoncalves/svaefh';
 
-                                        if (await canLaunch(url)) {
-                                          await launch(url);
-                                        } else {
-                                          throw 'Could not launch $url';
-                                        }
+                                        await launch(url);
                                       },
                                       child: Text('© AEFH e Rui Gonçalves'),
                                     ),
