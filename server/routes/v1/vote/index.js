@@ -19,7 +19,7 @@ router
             Poll.findOne({ code: req.params.code.toLowerCase() })
                 .populate('options', 'name')
                 .select('name internal type options allow')
-                .exec((err, data) => {
+                .exec(async (err, data) => {
                     if (err) {
                         console.error(err);
                         return res.sendStatus(400);
@@ -36,10 +36,19 @@ router
                         vote = false;
                     }
 
-                    if (data.internal && data.allow.length > 0) {
+                    if (vote && data.internal && data.allow.length > 0) {
                         const mail = req.user.email.toLowerCase();
 
                         vote = data.allow.includes(mail);
+                    }
+
+                    if (vote && req.user) {
+                        const alreadyVoted = await Vote.findOne({
+                            poll: data._id,
+                            user: req.user.userId
+                        });
+
+                        vote = !alreadyVoted;
                     }
 
                     return res.json({

@@ -48,7 +48,7 @@ As principais funcionalidades:
 São Necessários:
 
 - Docker e Docker Compose [(Opcionalmente Docker Registry e Docker Swarm Mode)](https://docs.docker.com/engine/swarm/stack-deploy/)
-- Chaves da Google OAuth2 API (Web Android e IOS)
+- Chaves da Google OAuth2 API (Web)
 - Email No-Reply (SMTP e Less Secure Apps ativas para essa conta de email)
 - Dominios dos Emails de Professores e Alunos Distintos (ou sub-dominios Ex: email@alunos.aefh.pt; email@aefh.pt)
 
@@ -70,6 +70,13 @@ Em Adição, para Android e IOS, São Necessários:
 Instruções:
 
 - Configure o client/android/key.properties (https://flutter.dev/docs/deployment/android)
+- Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma android (Comece adicionando o Firebase ao seu aplicativo) e coloque o google-services.json em client/android/app/ no servidor preencha o GOOGLE_CLIENT_ID_MOBILE com o Web client (auto created by Google Services) (obter da google cloud api)
+- Execute no terminal:
+
+    cd client
+    mkdir build
+    mkdir build/symbols
+    flutter build apk --obfuscate --split-debug-info build/symbols --no-sound-null-safety
 
 ## Tecnologias Utilizadas
 
