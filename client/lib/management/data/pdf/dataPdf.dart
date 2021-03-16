@@ -6,8 +6,14 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class DataPdf extends StatelessWidget {
+class DataPdf extends StatefulWidget {
+  @override
+  _DataPdfState createState() => _DataPdfState();
+}
+
+class _DataPdfState extends State<DataPdf> {
   var title = '';
+
   var content;
 
   Future<Uint8List> _generatePdf(PdfPageFormat format, String title) {

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../config.dart';
 
-// TODO Ios Integration
-
 // Scopes
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: <String>['email', 'profile'],

@@ -2,7 +2,8 @@ const { OAuth2Client } = require('google-auth-library');
 
 const clientId = [
     process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_ID_MOBILE
+    process.env.GOOGLE_CLIENT_ID_ANDROID,
+    process.env.GOOGLE_CLIENT_ID_IOS
 ];
 
 const client = new OAuth2Client(clientId);
