@@ -55,28 +55,30 @@ São Necessários:
 Intruções:
 
 <ol>
-    <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição</li>
+    <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição (GOOGLE_CLIENT_ID_MOBILE vai ser preenchido mais tarde)</li>
     <li>Editar client/index.html (copie de client/template) e adicione a sua chave OAuth da Google (linha 20)</li>
     <li>Copie e edite o ficheiro client/lib/config.dart (client/template/config.dart)</li>
-    <li>Execute num terminal linux sudo ./build/buildScripts/build.sh</li>
+    <li>Configure o client/android/key.properties (https://flutter.dev/docs/deployment/android), coloque o key.jks em client/android/app/</li>
+    <li>Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma android (Comece adicionando o Firebase ao seu aplicativo) e coloque o google-services.json em client/android/app/ no servidor preencha o GOOGLE_CLIENT_ID_MOBILE com o Web client (auto created by Google Services) (obter da google cloud api)</li>
+    <li>Execute num terminal linux com docker: sudo ./build/buildScripts/build.sh</li>
     <li>Envie o ficheiro build/build.zip para produção</li>
 </ol>
 
-Em Adição, para Android e IOS, São Necessários:
+Em Adição, para IOS, São Necessários:
 
-- Android Studio (testado com 4.1.2)
-- macOS + XCode (testado com macOS 11.x.x xxx e XCode x.x.x)
+- IOS: macOS + XCode + CocoaPods (não testado)
 
 Instruções:
 
-- Configure o client/android/key.properties (https://flutter.dev/docs/deployment/android)
-- Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma android (Comece adicionando o Firebase ao seu aplicativo) e coloque o google-services.json em client/android/app/ no servidor preencha o GOOGLE_CLIENT_ID_MOBILE com o Web client (auto created by Google Services) (obter da google cloud api)
-- Execute no terminal:
+- Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma ios (Comece adicionando o Firebase ao seu aplicativo) e coloque o GoogleService-Info.plist em client/ios/runner/ no servidor preencha o GOOGLE_CLIENT_ID_MOBILE com o Web client (auto created by Google Services) (obter da google cloud api)
+- Copie e configure o Info.plist da pasta client/template para client/ios/runner
+- execute no terminal
 
     cd client
     mkdir build
     mkdir build/symbols
-    flutter build apk --obfuscate --split-debug-info build/symbols --no-sound-null-safety
+    mkdir build/symbols/ios
+    flutter build ipa --obfuscate --split-debug-info build/symbols/ios --no-sound-null-safety
 
 ## Tecnologias Utilizadas
 

@@ -7,8 +7,8 @@
    <application
         android:label="SVAEFH"
         android:icon="@mipmap/ic_launcher"
-        <!-- TODO -->
         android:usesCleartextTraffic="true">
+        <!-- TODO -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -1,0 +1,18 @@
+FROM cirrusci/flutter:2.0.2 AS build-stage
+
+# Create svaefh directory
+WORKDIR /usr/src/svaefh
+
+# Bundle svaefh Source
+COPY . .
+
+# Build
+RUN flutter build web --no-sound-null-safety
+RUN mkdir -p build/symbols/android
+RUN flutter build apk --obfuscate --split-debug-info build/symbols/android --no-sound-null-safety
+
+# Copy to Build
+FROM scratch AS export-stage
+COPY --from=build-stage /usr/src/svaefh/build/web /
+COPY --from=build-stage /usr/src/svaefh/build/app/outputs/flutter-apk/app-release.apk /apps/android/svaefh.apk
+COPY --from=build-stage /usr/src/svaefh/build/symbols/android /apps/android/symbols/

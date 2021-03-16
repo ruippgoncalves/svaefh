@@ -37,12 +37,14 @@ mkdir build/client/web
 DOCKER_BUILDKIT=1 docker build -o ./build/client/web -f ./build/buildScripts/Dockerfile.client ./client
 DOCKER_BUILDKIT=1 docker build -o ./build/server -f ./build/buildScripts/Dockerfile.server ./server
 
-cp -r ./client/docker ./build/client
-rm -R ./build/client/docker/email
+cp -r ./build/clnDocker ./build/client
+mv ./build/client/clnDocker ./build/client/docker
+mkdir ./build/client/web/static
+mv ./build/client/docker/email ./build/client/web/static
 
 # Zip
 cp LICENSE build/
 cd build
 touch client/docker/letsencrypt/acme_challenge_goes_here
-zip -r build.zip * -x **/.gitkeep **/.gitignore ./buildScripts/\*
+zip -r build.zip * -x **/.gitkeep **/.gitignore ./buildScripts/\* ./clnDocker/\*
 cd ..

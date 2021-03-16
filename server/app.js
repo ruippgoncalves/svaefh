@@ -24,9 +24,6 @@ if (process.env.NODE_ENV === 'development') {
 // Routes
 app.use('/api/v1', require('./routes/v1'));
 
-// Web Page
-app.use(express.static('web'));
-
 // Listen on Port
 const port = process.env.PORT || 3000;
 app.listen(port, () =>
