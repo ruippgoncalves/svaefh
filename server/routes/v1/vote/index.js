@@ -21,7 +21,6 @@ router
                 .select('name internal type options allow')
                 .exec(async (err, data) => {
                     if (err) {
-                        console.error(err);
                         return res.sendStatus(400);
                     }
 
@@ -118,19 +117,21 @@ router
                         )
                             return res.sendStatus(400);
 
-                        for (let i = req.body.vote.length; i > 0; i--) {
-                            if (!proceed2.has(i)) return res.sendStatus(400);
+                        for (let i = req.body.vote.length - 1; i > 0; i--) {
+                            if (!proceed2.has(i)) return res.sendStatus(401);
                         }
                     }
 
                     // Cheks if the option selected is in the Poll
                     let proceed = true;
                     req.body.vote.forEach((opt) => {
-                        proceed &=
-                            data.options.includes(opt.opt) &&
-                            (![1, 2].includes(data.type)
-                                ? opt.ir === undefined
-                                : opt.ir !== undefined);
+                        proceed &= ![1, 2].includes(data.type)
+                            ? opt.ir === undefined &&
+                              data.options.includes(opt.opt)
+                            : opt.ir !== undefined &&
+                              data.options.some(
+                                  (e) => e.toString() === opt.opt
+                              );
                     });
                     if (!proceed) return res.sendStatus(400);
 

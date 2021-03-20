@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { requireAuthCreate } = require('../../../../middleware/auth');
 const validate = require('../../../../middleware/validate');
 const Poll = require('../../../../models/Poll');
-const sendMail = require('../../../../config/db');
+const sendMail = require('../../../../config/email');
 
 // Get Data or Start/Finish the Poll
 router
@@ -129,7 +129,9 @@ router
                                 pipeline: [
                                     {
                                         $match: {
-                                            $expr: ['$_id', '$$ids']
+                                            $expr: {
+                                                $eq: ['$_id', '$$ids']
+                                            }
                                         }
                                     },
                                     {

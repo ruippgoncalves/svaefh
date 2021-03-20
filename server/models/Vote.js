@@ -10,7 +10,7 @@ const VoteSchema = new mongoose.Schema({
 });
 
 VoteSchema.index(
-    { votacao: 1, user: 1, irpos: 1, publicUnique: 1 },
+    { poll: 1, user: 1, irpos: 1, publicUnique: 1 },
     { unique: true }
 );
 

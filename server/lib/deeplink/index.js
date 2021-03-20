@@ -6,6 +6,7 @@ const path = require('path');
 module.exports = () => {
     const deeplink = (req, res) => {
         const options = {
+            title: 'SVAEFH',
             url: `svaefh://redirect?code=${req.query.code}`,
             fallback: `${req.protocol}://${req.get('host')}`,
             android_package_name: process.env.ANDROID_PACKAGE_NAME,

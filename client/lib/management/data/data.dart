@@ -110,9 +110,7 @@ class _DataState extends State<Data> {
                         .toList() ??
                     [];
 
-                voteDt = IrvElection([
-                  RankedBallot(['b', 'c', 'a'])
-                ]);
+                voteDt = IrvElection(ballots);
                 break;
 
               // case 2:

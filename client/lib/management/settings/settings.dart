@@ -128,9 +128,9 @@ class _SettingsState extends State<Settings> {
                   'internal': internal,
                   'type': invertType(type),
                   'options': type == 'PV' && white
-                      ? [...options, 'Voto em Branco']
+                      ? [...options, 'Voto em Branco'].toSet().toList()
                       : options,
-                  'allow': all[0] != '' ? all : []
+                  'allow': all[0] != '' ? all.toSet().toList() : []
                 }),
               )
                   .then((value) {

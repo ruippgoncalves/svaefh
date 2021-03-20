@@ -29,10 +29,18 @@ services:
 
   mongodb:
     image: mongo:4.4.1
+    hostname: mongodb
     ports:
       - "27017:27017"
     volumes:
       - ./data/mongo:/data/db
+    environment:
+      - MONGO_REPLICA_SET_NAME: rs0
+    command: ["-f", "/etc/mongod.conf", "--replSet", "rs0", "--bind_ip_all"]
+    healthcheck:
+      test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
     deploy:
       placement:
         max_replicas_per_node: 1
