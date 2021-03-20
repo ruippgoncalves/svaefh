@@ -44,10 +44,12 @@ class _VoteState extends State<Vote> {
           {'opt': args['options'][0]['_id']}
         ];
       } else {
-        opts = args['options']
-            .asMap()
-            .entries
-            .map((i) => {'opt': i.value['_id'], 'ir': i.key});
+        opts = [
+          ...args['options']
+              .asMap()
+              .entries
+              .map((i) => {'opt': i.value['_id'], 'ir': i.key})
+        ];
       }
     }
 
@@ -106,9 +108,11 @@ class _VoteState extends State<Vote> {
             })
           : IrVote(args['options'], (vals) {
               opts = vals
+                  .toList()
                   .asMap()
                   .entries
-                  .map((i) => {'opt': i.value, 'ir': i.key});
+                  .map((i) => {'opt': i.value, 'ir': i.key})
+                  .toList();
             }),
     );
   }

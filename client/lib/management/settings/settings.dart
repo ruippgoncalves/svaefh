@@ -66,7 +66,7 @@ class _SettingsState extends State<Settings> {
             type = getType(data.type);
             internal = data.internal;
             options = data.options.map((i) => i['name']).toList();
-            print(options);
+
             allow = data.allow.join(', ');
 
             white = options.contains('Voto em Branco');
@@ -351,6 +351,7 @@ class _SettingsState extends State<Settings> {
                     if (internal) ...{
                       Text('Emails'),
                       TextFormField(
+                        initialValue: allow,
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
                         maxLength: 50000,

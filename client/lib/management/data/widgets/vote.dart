@@ -9,12 +9,12 @@ class Vote extends StatelessWidget {
   Widget _podiumVote(BuildContext context) {
     return Stack(
       children: [
-        Image.asset('assets/podium.jpg'),
+        Image.asset('assets/podium.png'),
         AspectRatio(
           aspectRatio: 2.0157,
           child: Column(
             children: [
-              Spacer(flex: 1),
+              Spacer(flex: 2),
               Row(
                 children: [
                   Spacer(flex: 2),
@@ -52,7 +52,7 @@ class Vote extends StatelessWidget {
                   Spacer(flex: 3),
                 ],
               ),
-              Spacer(flex: 2),
+              Spacer(flex: 3),
               Row(
                 children: [
                   Spacer(flex: 3),
@@ -71,7 +71,7 @@ class Vote extends StatelessWidget {
                   Spacer(flex: 1),
                 ],
               ),
-              Spacer(flex: 3),
+              Spacer(flex: 5),
             ],
           ),
         ),

@@ -31,7 +31,7 @@ dependencies:
   # Other dependencies
   url_launcher: ^6.0.2
   charts_flutter: ^0.9.0 # No Sound Null Safety
-  vote: ^0.1.0+2 # No Sound Null Safety
+  vote: ^1.0.0
   qr_flutter: ^3.2.0 # No Sound Null Safety
   pdf: ^2.1.0 # No Sound Null Safety
   printing: ^4.1.0 # No Sound Null Safety
@@ -65,7 +65,7 @@ flutter:
     - assets/signInGoogle.png
     - assets/school.jpg
     - assets/school2.jpg
-    - assets/podium.jpg
+    - assets/podium.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

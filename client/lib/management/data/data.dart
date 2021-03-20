@@ -76,39 +76,55 @@ class _DataState extends State<Data> {
             ];
           }
 
+          var hasDT = false;
+
           if (data?.votes is List) {
+            final ln = data?.votes!.length ?? 0;
+
+            if (ln > 0) {
+              hasDT = true;
+            }
+          }
+
+          if (hasDT) {
             switch (data?.type) {
               case 0:
-                var ballots = data?.votes
-                    ?.map(
-                      (e) => PluralityBallot(e['votes'][0]['name'] as String),
-                    )
-                    .toList();
+                final ballots = data?.votes
+                        ?.map(
+                          (e) =>
+                              PluralityBallot(e['votes'][0]['name'] as String),
+                        )
+                        .toList() ??
+                    [];
 
                 voteDt = PluralityElection(ballots);
                 break;
 
               case 1:
-                var ballots = data?.votes
-                    ?.map(
-                      (e) => RankedBallot((e as Iterable)
-                          .map((i) => i['name'] as String)
-                          .toList()),
-                    )
-                    .toList();
+                final ballots = data?.votes
+                        ?.map(
+                          (e) => RankedBallot((e['votes'] as Iterable)
+                              .map((i) => i['name'] as String)
+                              .toList()),
+                        )
+                        .toList() ??
+                    [];
 
-                voteDt = IrvElection(ballots);
+                voteDt = IrvElection([
+                  RankedBallot(['b', 'c', 'a'])
+                ]);
                 break;
 
               // case 2:
               default:
-                var ballots = data?.votes
-                    ?.map(
-                      (e) => RankedBallot((e as Iterable)
-                          .map((i) => i['name'] as String)
-                          .toList()),
-                    )
-                    .toList();
+                final ballots = data?.votes
+                        ?.map(
+                          (e) => RankedBallot((e['votes'] as Iterable)
+                              .map((i) => i['name'] as String)
+                              .toList()),
+                        )
+                        .toList() ??
+                    [];
 
                 voteDt = CondorcetElection(ballots);
             }

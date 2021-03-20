@@ -127,7 +127,7 @@ packages:
       name: graphs
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "2.0.0"
   http:
     dependency: "direct main"
     description:
@@ -377,7 +377,7 @@ packages:
       name: vote
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+2"
+    version: "1.0.0"
   xml:
     dependency: transitive
     description:
