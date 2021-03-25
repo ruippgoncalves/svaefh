@@ -40,7 +40,7 @@ class _IrVoteState extends State<IrVote> {
               ),
         header: Container(
           child: Text(
-            'Opções',
+            'Opções da Votação',
             style: Theme.of(context).textTheme.headline5,
             textAlign: TextAlign.center,
           ),

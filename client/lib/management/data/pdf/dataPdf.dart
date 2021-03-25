@@ -138,7 +138,6 @@ class _DataPdfState extends State<DataPdf> {
         title: Text('Pré-Visualização'),
       ),
       body: PdfPreview(
-        //canChangePageFormat: false,
         pdfFileName: title,
         build: (format) => _generatePdf(format, title),
       ),

@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
 
                                         await launch(url);
                                       },
-                                      child: Text('© AEFH e Rui Gonçalves'),
+                                      child: Text('© AEFH por Rui Gonçalves'),
                                     ),
                                   ),
                                 ],

@@ -76,7 +76,7 @@ router
                             }
                         },
                         {
-                            $limit: 14
+                            $limit: 7
                         },
                         {
                             $sort: {

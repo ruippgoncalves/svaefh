@@ -38,11 +38,11 @@ router
         body('name').exists().isString().isLength({ min: 1, max: 30 }),
         body('internal').isBoolean().toBoolean(),
         body('type').isInt({ min: 0, max: 2 }),
-        body('options').exists().isArray({ max: 30 }).toArray(),
+        body('options').exists().isArray({ max: 31 }).toArray(),
         body('options.*')
             .optional({ nullable: true })
             .isString()
-            .isLength({ min: 1, max: 31 }),
+            .isLength({ min: 1, max: 30 }),
         body('allow').exists().isArray().toArray(),
         body('allow.*').optional({ nullable: true }).isEmail(),
 
@@ -125,10 +125,10 @@ router
 
                 if (!poll) throw Error();
 
-                await Option.remove({ poll: req.params.id })
+                await Option.removeMany({ poll: req.params.id })
                     .session(session)
                     .exec();
-                await Vote.remove({ poll: req.params.id })
+                await Vote.removeMany({ poll: req.params.id })
                     .session(session)
                     .exec();
 

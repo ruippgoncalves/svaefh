@@ -30,11 +30,11 @@ dependencies:
 
   # Other dependencies
   url_launcher: ^6.0.2
-  charts_flutter: ^0.9.0 # No Sound Null Safety
-  vote: ^1.0.0
-  qr_flutter: ^3.2.0 # No Sound Null Safety
-  pdf: ^2.1.0 # No Sound Null Safety
-  printing: ^4.1.0 # No Sound Null Safety
+  charts_flutter: ^0.10.0 # No Sound Null Safety
+  vote: ^1.0.1
+  qr_flutter: ^4.0.0
+  pdf: ^3.1.0
+  printing: ^5.0.4
   google_sign_in: ^5.0.0
   http: ^0.13.0
   uni_links: ^0.4.0 # No Sound Null Safety

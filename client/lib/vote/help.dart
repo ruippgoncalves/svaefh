@@ -18,7 +18,7 @@ class HelpBtn extends StatelessWidget {
         break;
 
       case 'CV':
-        this.title = 'Votação pelo Método de Condorcet';
+        this.title = 'Método de Condorcet';
         this.help =
             'Reordene por ordem de preferencia as opções (arrastando-as) e carregue em enviar!';
         break;

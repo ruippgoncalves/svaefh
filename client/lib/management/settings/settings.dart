@@ -198,15 +198,15 @@ class _SettingsState extends State<Settings> {
                           items: [
                             DropdownMenuItem(
                               value: 'PV',
-                              child: Text('Plurality Voting'),
+                              child: Text('Pluralidade de Votos'),
                             ),
                             DropdownMenuItem(
                               value: 'IR',
-                              child: Text('Instant Runoff Voting'),
+                              child: Text('Votação Classificada'),
                             ),
                             DropdownMenuItem(
                               value: 'CV',
-                              child: Text('Condorcet Method'),
+                              child: Text('Método de Condorcet'),
                             ),
                           ],
                         ),
@@ -304,7 +304,7 @@ class _SettingsState extends State<Settings> {
                       ],
                     ),
                     // -------------------------------
-                    Text('Opções:'),
+                    Text('Opções da Votação:'),
                     ...options
                         .asMap()
                         .entries
