@@ -56,6 +56,7 @@ Intruções:
 
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição (GOOGLE_CLIENT_ID_MOBILE vai ser preenchido mais tarde)</li>
+    <li>Opcionalmente siga o passo 1 do iOS</li>
     <li>Editar client/index.html (copie de client/template) e adicione a sua chave OAuth da Google (linha 20)</li>
     <li>Copie e edite o ficheiro client/lib/config.dart (client/template/config.dart)</li>
     <li>Configure o client/android/key.properties (https://flutter.dev/docs/deployment/android), coloque o key.jks em client/android/app/</li>
@@ -72,9 +73,11 @@ Em Adição, para IOS, São Necessários:
 
 Instruções:
 
-<li>Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma ios (Comece adicionando o Firebase ao seu aplicativo) e coloque o GoogleService-Info.plist em client/ios/runner/ no servidor preencha o GOOGLE_CLIENT_ID_IOS com o iOS client (auto created by Google Services) (obter da google cloud api)</li>
-<li>Copie e configure o Info.plist da pasta client/template para client/ios/runner</li>
-<li>execute no terminal</li>
+<ol>
+    <li>Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma ios (Comece adicionando o Firebase ao seu aplicativo) e coloque o GoogleService-Info.plist em client/ios/runner/ no servidor preencha o GOOGLE_CLIENT_ID_IOS com o iOS client (auto created by Google Services) (obter da google cloud api)</li>
+    <li>Copie e configure o Info.plist da pasta client/template para client/ios/runner</li>
+    <li>execute no terminal</li>
+</ol>
 
     cd client
 
@@ -91,14 +94,17 @@ Instruções:
 As principais tecnologias:
 
 FrontEnd:
+
 - Flutter
 
 BackEnd:
+
 - Express.JS
 - Mongoose
 - Webpack
 
 Adicionalmente:
+
 - MongoDB
 - Docker
 - Mosaico
