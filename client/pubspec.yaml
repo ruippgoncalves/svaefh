@@ -38,6 +38,7 @@ dependencies:
   google_sign_in: ^5.0.0
   http: ^0.13.0
   uni_links: ^0.4.0 # No Sound Null Safety
+  #uni_links2: ^0.6.0+2 NO TESTES YET
   qr_code_scanner: ^0.4.0-nullsafety.0
 
 dev_dependencies:
