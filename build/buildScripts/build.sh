@@ -1,11 +1,11 @@
 # Check if Required Software is Avaiable
-if ! command -v zip &> /dev/null
+if ! [ -x "$(command -v zip)" ];
 then
     echo "zip could not be found"
     exit
 fi
 
-if ! command -v docker &> /dev/null
+if ! [ -x "$(command -v docker)" ];
 then
     echo "docker could not be found"
     exit
