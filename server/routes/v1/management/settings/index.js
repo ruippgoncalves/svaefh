@@ -125,10 +125,10 @@ router
 
                 if (!poll) throw Error();
 
-                await Option.removeMany({ poll: req.params.id })
+                await Option.deleteMany({ poll: req.params.id })
                     .session(session)
                     .exec();
-                await Vote.removeMany({ poll: req.params.id })
+                await Vote.deleteMany({ poll: req.params.id })
                     .session(session)
                     .exec();
 
