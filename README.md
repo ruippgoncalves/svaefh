@@ -56,11 +56,11 @@ Intruções:
 
 <ol>
     <li>Copiar server/config/config.example.env para server/config/config.env e proceder à sua edição (GOOGLE_CLIENT_ID_MOBILE vai ser preenchido mais tarde)</li>
-    <li>Opcionalmente siga o passo 1 do iOS</li>
-    <li>Editar client/index.html (copie de client/template) e adicione a sua chave OAuth da Google (linha 20)</li>
+    <li>Editar client/web/index.html (copie de client/template) e adicione a sua chave OAuth da Google (linha 20)</li>
     <li>Copie e edite o ficheiro client/lib/config.dart (client/template/config.dart)</li>
     <li>Configure o client/android/key.properties (https://flutter.dev/docs/deployment/android), coloque o key.jks em client/android/app/</li>
     <li>Ligue o firebase ao projeto no google cloud platform, adicione o a plataforma android (Comece adicionando o Firebase ao seu aplicativo) e coloque o google-services.json em client/android/app/ no servidor preencha o GOOGLE_CLIENT_ID_ANDROID com o Web client* (auto created by Google Services) (obter da google cloud api)</li>
+    <li>Opcionalmente siga o passo 1 do iOS</li>
     <li>Execute num terminal linux com docker: sudo ./build/buildScripts/build.sh</li>
     <li>Envie o ficheiro build/build.zip para produção</li>
 </ol>
