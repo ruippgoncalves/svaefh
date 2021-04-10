@@ -1,5 +1,5 @@
 # Check if Required Software is Avaiable
-if ! command -v openssl &> /dev/null
+if ! [ -x "$(command -v openssl)" ];
 then
     echo "openssl could not be found"
     exit

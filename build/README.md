@@ -15,7 +15,7 @@ Para Fins de Teste (Self-Signed Certificate):
 CertBot (Let's Encrypt)
 
     ./scripts/letsencrypt.sh
-    # Quando pedir o ACME Challenge, vá a um novo terminal (não necessário se estiver a renovar)
+    # Quando pedir o ACME Challenge, crie-o e vá a um novo terminal (não necessário se estiver a renovar)
     ./scripts/build.sh
     ./scripts/start.sh
     # Termine o processo iniciado no passo 1

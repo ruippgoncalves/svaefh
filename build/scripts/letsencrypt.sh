@@ -1,5 +1,5 @@
 # Check if Required Software is Avaiable
-if ! command -v certbot &> /dev/null
+if ! [ -x "$(command -v certbot)" ];
 then
     echo "certbot could not be found"
     exit

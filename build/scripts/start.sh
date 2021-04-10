@@ -1,5 +1,5 @@
 # Check if Required Software is Avaiable
-if ! command -v docker-compose &> /dev/null
+if ! [ -x "$(command -v docker-compose)" ];
 then
     echo "docker-compose could not be found"
     exit
