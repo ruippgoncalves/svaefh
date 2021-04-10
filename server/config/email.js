@@ -375,7 +375,7 @@ function sendMail(sendTo, code) {
                                                         style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
                                                         href="https://github.com/ruippgoncalves/svaefh"
                                                         style="color: #3F3D33; text-decoration: none;" target="_new">©
-                                                        Rui Gonçalves</a>
+                                                        AEFH por Rui Gonçalves</a>
                                                 </td>
                                             </tr>
                                         </tbody>
