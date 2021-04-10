@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="AEFH Logo" src="client/assets/icon.svg" width="250" style="border-radius: 15px">
+    <img alt="AEFH Logo" src="client/assets/icon.png" width="250" style="border-radius: 15px">
 </div>
 <br />
 
