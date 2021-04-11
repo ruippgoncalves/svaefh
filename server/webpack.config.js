@@ -2,13 +2,14 @@ const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = {
     entry: './app.js',
-    mode: 'development',
+    mode: 'production',
+    devtool: 'eval',
     target: 'node',
     output: {
         filename: 'server.min.js'
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: ['.js']
     },
     plugins: [
         new DotenvPlugin({
@@ -19,4 +20,4 @@ module.exports = {
     optimization: {
         minimize: true
     }
-}
+};
