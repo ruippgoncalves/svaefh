@@ -64,7 +64,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
           builder: (_) => AlertDialog(
             title: Text('Sem Internet'),
             content: Text(
-              'Por favor verifique a ligação à Internet, e de seguida reabra a apliação.',
+              'Por favor verifique a ligação à Internet, e de seguida reabra a aplicação.',
             ),
           ),
         ),
